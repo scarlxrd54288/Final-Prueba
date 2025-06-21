@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.EditorTools;
@@ -16,8 +17,15 @@ public class CarController : MonoBehaviour
     private CarPoolManager poolManager;
     private Obstacle currentObstacle;
 
-    [SerializeField] private bool isStopped; // Para observar en el Inspector
+    public bool isStopped;
     private bool isInitialized = false;
+
+    // Tiempo de gracia para evitar que el raycast detecte el propio coche al spawnear
+    private float spawnGraceTime = 0.1f;
+    private float spawnTimer = 0f;
+
+    // Evento que avisa cuando el auto se retira
+    public event Action OnCarRemoved;
 
     public void Initialize(Vector3 direction, float speed, float damagePerSecond, int typeIndex, CarPoolManager poolManager, GridData carTrafficData, Grid grid)
     {
@@ -31,6 +39,7 @@ public class CarController : MonoBehaviour
 
         isStopped = false;
         currentObstacle = null;
+        spawnTimer = spawnGraceTime;
 
         currentCell = grid.WorldToCell(transform.position);
 
@@ -50,6 +59,11 @@ public class CarController : MonoBehaviour
     void Update()
     {
         if (!isInitialized) return;
+
+        if (spawnTimer > 0f)
+        {
+            spawnTimer -= Time.deltaTime;
+        }
 
         if (isStopped)
         {
@@ -75,11 +89,35 @@ public class CarController : MonoBehaviour
         Vector3 targetPosition = transform.position + direction * speed * Time.deltaTime;
         Vector3Int nextCell = grid.WorldToCell(targetPosition);
 
+        // Raycast solo si ya terminó el tiempo de gracia
+        if (spawnTimer <= 0f)
+        {
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.5f))
+            {
+                Obstacle obs = hit.collider.GetComponent<Obstacle>();
+                if (obs != null)
+                {
+                    currentObstacle = obs;
+                    isStopped = true;
+                    return;
+                }
+
+                CarController otherCar = hit.collider.GetComponent<CarController>();
+                if (otherCar != null && otherCar != this)
+                {
+                    isStopped = true;
+                    currentObstacle = null;
+                    return;
+                }
+            }
+        }
+
         if (nextCell != currentCell)
         {
             if (carTrafficData.HasObjectAt(nextCell))
             {
-                Debug.Log($"{gameObject.name} detenido: celda adelante ocupada {nextCell}");
+                isStopped = true;
+                currentObstacle = null;
                 return;
             }
 
@@ -87,24 +125,10 @@ public class CarController : MonoBehaviour
             carTrafficData.RemoveObjectAt(currentCell);
             carTrafficData.AddObjectAt(nextCell, Vector2Int.one, -1, -1, GridObjectType.Car);
             currentCell = nextCell;
-
-            //Debug.Log($"{gameObject.name} se movió a celda {nextCell}");
         }
         else
         {
             transform.position = targetPosition;
-        }
-
-        // Verificar si hay obstáculo adelante
-        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.5f))
-        {
-            Obstacle obs = hit.collider.GetComponent<Obstacle>();
-            if (obs != null)
-            {
-                currentObstacle = obs;
-                isStopped = true;
-                Debug.Log($"{gameObject.name} se detiene por obstáculo {obs.name}");
-            }
         }
     }
 
@@ -115,7 +139,6 @@ public class CarController : MonoBehaviour
             isStopped = false;
             currentObstacle = null;
 
-            // Limpia la celda si hace falta
             Vector3 forward = transform.position + direction * 0.5f;
             Vector3Int forwardCell = grid.WorldToCell(forward);
             carTrafficData.RemoveObjectAt(forwardCell);
@@ -123,29 +146,28 @@ public class CarController : MonoBehaviour
             return;
         }
 
-        /*
-        if (currentObstacle.IsDestroyed())
-        {
-            Debug.Log($"{gameObject.name} reanuda movimiento (obstáculo destruido)");
-            isStopped = false;
-            currentObstacle = null;
-            return;
-        }
-        */
         currentObstacle.TakeDamage(damage * Time.deltaTime);
     }
-
 
     void TryResumeMovement()
     {
         Vector3 nextPos = transform.position + direction * 0.5f;
         Vector3Int nextCell = grid.WorldToCell(nextPos);
 
-        bool obstacleCleared = !Physics.Raycast(transform.position, direction, 0.5f);
+        RaycastHit hit;
+        bool obstacleCleared = !Physics.Raycast(transform.position, direction, out hit, 0.5f);
 
-        Debug.Log($"{name} [TryResume] nextCell: {nextCell}, occupied: {carTrafficData.HasObjectAt(nextCell)}, rayHit: {!obstacleCleared}");
+        if (!obstacleCleared)
+        {
+            Debug.Log($"{name} [TryResume] nextCell: {nextCell}, occupied: {carTrafficData.HasObjectAt(nextCell)}, rayHit: True, objectHit: {hit.collider.gameObject.name}");
+        }
+        else
+        {
+            Debug.Log($"{name} [TryResume] nextCell: {nextCell}, occupied: {carTrafficData.HasObjectAt(nextCell)}, rayHit: False");
+        }
 
-        if (!carTrafficData.HasObjectAt(nextCell) && obstacleCleared)
+        bool cellFree = !carTrafficData.HasObjectAt(nextCell);
+        if (cellFree && obstacleCleared)
         {
             isStopped = false;
             currentObstacle = null;
@@ -153,7 +175,10 @@ public class CarController : MonoBehaviour
         }
     }
 
-
+    public bool IsStopped()
+    {
+        return isStopped;
+    }
 
     void CheckOutOfBounds()
     {
@@ -164,6 +189,7 @@ public class CarController : MonoBehaviour
             poolManager.ReturnCarToPool(gameObject, typeIndex);
             Debug.Log($"{gameObject.name} se eliminó fuera de límites en {transform.position}");
 
+            OnCarRemoved?.Invoke();
         }
     }
 
@@ -171,21 +197,16 @@ public class CarController : MonoBehaviour
     {
         if (!Application.isPlaying || grid == null) return;
 
-        // Celda actual
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(grid.GetCellCenterWorld(currentCell) + new Vector3(0, 0.1f, 0), new Vector3(1, 0.1f, 1));
 
-        // Celda siguiente
         Vector3 nextPos = transform.position + direction.normalized * 0.5f;
         Vector3Int nextCell = grid.WorldToCell(nextPos);
 
         Gizmos.color = isStopped ? Color.red : Color.cyan;
         Gizmos.DrawWireCube(grid.GetCellCenterWorld(nextCell) + new Vector3(0, 0.2f, 0), new Vector3(1, 0.1f, 1));
 
-        // Línea de dirección
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + direction.normalized * 1.5f);
     }
-
-
 }

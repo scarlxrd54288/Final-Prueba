@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1696568998791194009}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.005000055, y: 0.608, z: 0.004000008}
+  m_LocalPosition: {x: -0.005000055, y: 0.388, z: 0.004000008}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 3649364556365082322}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.005000055, y: 0.608, z: 0.004000008}
+  m_LocalPosition: {x: -0.005000055, y: 0.388, z: 0.004000008}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -194,7 +194,7 @@ Transform:
   m_GameObject: {fileID: 3792084409709400830}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.22, z: -1.003}
+  m_LocalPosition: {x: 0, y: -0, z: -1.003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -263,8 +263,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4659285, y: 0.7697649, z: 0.46796703}
-  m_Center: {x: -0.004076898, y: 0.60746586, z: 0.003057599}
+  m_Size: {x: 0.4659285, y: 0.7794706, z: 0.46796703}
+  m_Center: {x: -0.004076898, y: 0.38262329, z: 0.003057599}
 --- !u!1 &7206940821374295394
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +294,7 @@ Transform:
   m_GameObject: {fileID: 7206940821374295394}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.005, y: 0.608, z: 0.004}
+  m_LocalPosition: {x: -0.005, y: 0.388, z: 0.004}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -368,7 +368,7 @@ PrefabInstance:
     - target: {fileID: 6444038668169161269, guid: 3ec486331ae680e4681596e51f13ae7c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.608
+      value: 0.388
       objectReference: {fileID: 0}
     - target: {fileID: 6444038668169161269, guid: 3ec486331ae680e4681596e51f13ae7c,
         type: 3}

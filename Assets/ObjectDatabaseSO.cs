@@ -32,4 +32,26 @@ public class ObjectData
     // Por ejemplo, resistencia por nivel (índice 0 = base)
     [field: SerializeField]
     public int[] ResistancePerLevel;
+
+    [field: SerializeField]
+    public int UnlockCost { get; private set; }
+
+    [field: SerializeField]
+    public bool Unlocked { get; set; } // puede ser set público para modificar en runtime
+
+    [field: SerializeField]
+    public float CooldownTime { get; private set; }
+
+    [HideInInspector]
+    public float CooldownTimer; // está bien oculto
+
+    [field: SerializeField]
+    public bool BlocksCars { get; private set; }
+
+    [field: SerializeField]
+    public bool IsOffensive { get; private set; }
+
+    [field: SerializeField]
+    public int Durability { get; private set; }
+
 }

@@ -56,7 +56,19 @@ public class PreviewSystem : MonoBehaviour
             }
             renderer.materials = materials;
         }
+        DisableAllColliders(previewObject);
+
     }
+
+    private void DisableAllColliders(GameObject go)
+    {
+        foreach (var collider in go.GetComponentsInChildren<Collider>())
+        {
+            collider.enabled = false;
+        }
+    }
+
+
     public void StopShowingPreview()
     {
         cellIndicator.SetActive(false );
@@ -85,8 +97,16 @@ public class PreviewSystem : MonoBehaviour
 
     private void MovePreview(Vector3 position)
     {
-        previewObject.transform.position = new Vector3(position.x, 
-            position.y + previewYOffset, 
-            position.z);
+        if (previewObject != null)
+        {
+            previewObject.transform.position = new Vector3(position.x,
+                position.y + previewYOffset,
+                position.z);
+        }
+        else
+        {
+            Debug.LogWarning("[PreviewSystem] previewObject ya fue destruido.");
+        }
     }
+
 }

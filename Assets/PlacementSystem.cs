@@ -94,23 +94,29 @@ public class PlacementSystem : MonoBehaviour
     }
     private void PlaceStructure()
     {
-        if(inputManager.IsPointerOverUI())
+        if (inputManager.IsPointerOverUI())
+            return;
+
+        if (selectedObjectIndex < 0)
+            return;
+
+        var objData = database.objectsData[selectedObjectIndex];
+
+        //Desactivar esto para Cool Down---------------
+        // Verificar si el objeto está desbloqueado antes de colocarlo
+        if (!objData.Unlocked || objData.CooldownTimer > 0f)
         {
+            Debug.Log($"[PlacementSystem] Objeto bloqueado o en cooldown: {objData.Name}");
+            StopPlacement();              //  Anula selección
+            preview.StopShowingPreview(); //  Apaga la vista previa
             return;
         }
 
-        /*Vector3 mousePosition = inputManager.GetSelectedMapPosition();
-        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
-        bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
-        if (placementValidity == false)
-            return;
-        */
 
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
-        var objData = database.objectsData[selectedObjectIndex];
         var type = objData.ID == 0 ? GridObjectType.Floor : GridObjectType.Furniture;
 
         if (!globalGridData.CanPlaceObjectAt(gridPosition, objData.Size, type))
@@ -118,50 +124,34 @@ public class PlacementSystem : MonoBehaviour
 
         source.Play();
 
-        /*bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
-        if (placementValidity == false)
-        {
-            AudioSource.PlayOneShot(wrongPlaacementClip);
-            return;
-        }
-
-        source.PlayOneShot(correctPlacementClip);
-        */
-        //GameObject newObject = Instantiate(database.objectsData[selectedObjectIndex].Prefab);
-        //newObject.transform.position = grid.CellToWorld(gridPosition);
         GameObject newObject = Instantiate(objData.Prefab);
         newObject.transform.position = grid.CellToWorld(gridPosition);
 
+        //  Iniciar cooldown
+        objData.CooldownTimer = objData.CooldownTime;
 
-
-        /*placedGameObjects.Add( newObject );
-        GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ?
-            floorData;
-            furnitureData;
-        selectedData AddOcjectAt(gridPosition);*/
-
-        //Aumento----------------Resistencia y Evolución
+        // Configurar resistencia si es obstáculo
         Obstacle obstacle = newObject.GetComponent<Obstacle>();
         if (obstacle != null)
-        {
-            //var objData = database.objectsData[selectedObjectIndex];
-            //obstacle.Evolve(0, objData.BaseResistance); // Nivel 0, resistencia base
             obstacle.Evolve(0, objData.BaseResistance);
-        }
-
-
 
         placedGameObject.Add(newObject);
-        //GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ? floorData : furnitureData;
-        //selectedData.AddObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size, database.objectsData[selectedObjectIndex].ID, placedGameObject.Count - 1);
-        
-        //var objData = database.objectsData[selectedObjectIndex];
-        //var type = objData.ID == 0 ? GridObjectType.Floor : GridObjectType.Furniture;
 
-        globalGridData.AddObjectAt(gridPosition, objData.Size, objData.ID, placedGameObject.Count - 1, type);
-            
+        globalGridData.AddObjectAt(
+            gridPosition,
+            objData.Size,
+            objData.ID,
+            placedGameObject.Count - 1,
+            type
+        );
+
         preview.UpdatePosition(grid.CellToWorld(gridPosition), false);
+        //Cool Down------------------
+        preview.StopShowingPreview();
+        StopPlacement();
+
     }
+
 
 
 

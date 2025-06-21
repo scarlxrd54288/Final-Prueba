@@ -20,13 +20,27 @@ MonoBehaviour:
       type: 3}
     <BaseResistance>k__BackingField: 3
     ResistancePerLevel: 
+    <UnlockCost>k__BackingField: 0
+    <Unlocked>k__BackingField: 0
+    <CooldownTime>k__BackingField: 3
+    CooldownTimer: 0
+    <BlocksCars>k__BackingField: 0
+    <IsOffensive>k__BackingField: 0
+    <Durability>k__BackingField: 0
   - <Name>k__BackingField: garrafal
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 8668491290567390674, guid: d94acb3f29437b04bbf8cbffac509e32,
       type: 3}
-    <BaseResistance>k__BackingField: 6
+    <BaseResistance>k__BackingField: 5
     ResistancePerLevel: 
+    <UnlockCost>k__BackingField: 3
+    <Unlocked>k__BackingField: 1
+    <CooldownTime>k__BackingField: 5
+    CooldownTimer: 0
+    <BlocksCars>k__BackingField: 0
+    <IsOffensive>k__BackingField: 0
+    <Durability>k__BackingField: 0
   - <Name>k__BackingField: canasta
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 1, y: 1}
@@ -34,6 +48,13 @@ MonoBehaviour:
       type: 3}
     <BaseResistance>k__BackingField: 9
     ResistancePerLevel: 
+    <UnlockCost>k__BackingField: 5
+    <Unlocked>k__BackingField: 0
+    <CooldownTime>k__BackingField: 8
+    CooldownTimer: 3.9768696
+    <BlocksCars>k__BackingField: 0
+    <IsOffensive>k__BackingField: 0
+    <Durability>k__BackingField: 0
   - <Name>k__BackingField: barril
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 1, y: 1}
@@ -41,3 +62,10 @@ MonoBehaviour:
       type: 3}
     <BaseResistance>k__BackingField: 12
     ResistancePerLevel: 
+    <UnlockCost>k__BackingField: 8
+    <Unlocked>k__BackingField: 0
+    <CooldownTime>k__BackingField: 10
+    CooldownTimer: 0
+    <BlocksCars>k__BackingField: 0
+    <IsOffensive>k__BackingField: 0
+    <Durability>k__BackingField: 0
