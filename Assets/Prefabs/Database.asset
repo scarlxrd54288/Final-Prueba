@@ -35,9 +35,9 @@ MonoBehaviour:
     <BaseResistance>k__BackingField: 5
     ResistancePerLevel: 
     <UnlockCost>k__BackingField: 3
-    <Unlocked>k__BackingField: 1
+    <Unlocked>k__BackingField: 0
     <CooldownTime>k__BackingField: 5
-    CooldownTimer: 0
+    CooldownTimer: 2.4537427
     <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
     <UnlockCost>k__BackingField: 5
     <Unlocked>k__BackingField: 0
     <CooldownTime>k__BackingField: 8
-    CooldownTimer: 3.9768696
+    CooldownTimer: 0
     <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 0
