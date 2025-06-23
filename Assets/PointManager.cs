@@ -8,12 +8,13 @@ public class PointManager : MonoBehaviour
     public int currentPoints = 0;
     public ObjectDatabaseSO objectDatabase;
 
-    public enum GameState { Calm, Wave1, BetweenWaves, Wave2, Victory }
+    public enum GameState { Calm, Wave1, BetweenWaves, Wave2, Victory, GameOver }
     public GameState currentState = GameState.Calm;
 
     private float allLanesBlockedTime = 0f;
+    private float timer = 0f;
+    [SerializeField] private float maxGameTime = 300f; // 5 minutos por ejemplo
 
-    // Eventos para UI y otros listeners
     public event Action<int> OnPointsUpdated;
     public event Action<GameState> OnGameStateChanged;
 
@@ -27,43 +28,24 @@ public class PointManager : MonoBehaviour
 
     private void Update()
     {
+        if (currentState == GameState.Victory || currentState == GameState.GameOver)
+            return;
+
+        timer += Time.deltaTime;
         Debug.Log("Evaluando puntos...");
         Debug.Log($"Total puntos: {currentPoints}");
+
         AccumulatePoints();
         CheckUnlocks();
         UpdateCooldowns();
         UpdateGameState();
     }
 
-    /*
-    private float pointsAccumulator = 0f;
-        private void AccumulatePoints()
-    {
-        int totalBlocked = 0;
-        foreach (var lane in TrafficManager.Instance.lanes)
-        {
-            int blockedCount = lane.GetBlockedCarsCount();
-            totalBlocked += blockedCount;
-            float pointRate = 3f;
-            pointsAccumulator += blockedCount * Time.deltaTime * pointRate;
-        }
-
-        int pointsGained = Mathf.FloorToInt(pointsAccumulator);
-        if (pointsGained > 0)
-        {
-            currentPoints += pointsGained;
-            pointsAccumulator -= pointsGained;
-            Debug.Log($"Puntos ganados acumulados: {pointsGained}, Total puntos: {currentPoints}");
-            OnPointsUpdated?.Invoke(currentPoints);
-        }
-    }
-    */
-
     private float pointsAccumulator = 0f;
 
     private void AccumulatePoints()
     {
-        float pointRate = 1f; // puntos por auto bloqueado por segundo
+        float pointRate = 1f;
         int totalBlocked = 0;
 
         foreach (var lane in TrafficManager.Instance.lanes)
@@ -83,8 +65,6 @@ public class PointManager : MonoBehaviour
             OnPointsUpdated?.Invoke(currentPoints);
         }
     }
-
-
 
     private void CheckUnlocks()
     {
@@ -110,17 +90,20 @@ public class PointManager : MonoBehaviour
         }
     }
 
-
     private void UpdateGameState()
     {
         GameState previousState = currentState;
 
-        if ((currentPoints >= 100 || IsUnlocked(1)) && currentState == GameState.Calm)
+        if (currentPoints >= 100 || IsUnlocked(1))
         {
-            currentState = GameState.Wave1;
-            Debug.Log("Oleada 1 iniciada");
+            if (currentState == GameState.Calm)
+            {
+                currentState = GameState.Wave1;
+                Debug.Log("Oleada 1 iniciada");
+            }
         }
-        else if ((currentPoints >= 300 || IsUnlocked(3)) && currentState == GameState.BetweenWaves)
+
+        if ((currentPoints >= 300 || IsUnlocked(3)) && currentState == GameState.BetweenWaves)
         {
             currentState = GameState.Wave2;
             Debug.Log("Oleada 2 iniciada");
@@ -130,6 +113,12 @@ public class PointManager : MonoBehaviour
         {
             currentState = GameState.Victory;
             Debug.Log("¡Victoria!");
+        }
+
+        if (timer >= maxGameTime)
+        {
+            currentState = GameState.GameOver;
+            Debug.Log("¡Derrota por tiempo!");
         }
 
         if (currentState != previousState)
@@ -165,21 +154,27 @@ public class PointManager : MonoBehaviour
     public bool IsUnlocked(int id)
     {
         var obj = objectDatabase.objectsData.Find(o => o.ID == id);
-        if (obj == null) return false;
-        return obj.Unlocked;
+        return obj != null && obj.Unlocked;
     }
 
     public bool CanPlaceObstacle(int id)
     {
         var obj = objectDatabase.objectsData.Find(o => o.ID == id);
-        if (obj == null) return false;
-        return obj.Unlocked && obj.CooldownTimer <= 0;
+        return obj != null && obj.Unlocked && obj.CooldownTimer <= 0;
     }
 
     public void SetCooldown(int id)
     {
         var obj = objectDatabase.objectsData.Find(o => o.ID == id);
-        if (obj == null) return;
-        obj.CooldownTimer = obj.CooldownTime;
+        if (obj != null)
+            obj.CooldownTimer = obj.CooldownTime;
     }
+
+
+
+    public float GetTimeLeft()
+    {
+        return Mathf.Max(0, maxGameTime - timer);
+    }
+
 }
