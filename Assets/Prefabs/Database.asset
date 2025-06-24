@@ -65,12 +65,12 @@ MonoBehaviour:
     <UnlockCost>k__BackingField: 8
     <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 10
-    CooldownTimer: 2.1623645
+    CooldownTimer: 0
     <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 0
   - <Name>k__BackingField: tronco
-    <ID>k__BackingField: 3
+    <ID>k__BackingField: 4
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 7193580031783461337, guid: 8b0bd49eacdcb3544baf43178356ba6e,
       type: 3}
@@ -84,7 +84,7 @@ MonoBehaviour:
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 0
   - <Name>k__BackingField: contenedor
-    <ID>k__BackingField: 3
+    <ID>k__BackingField: 5
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 4611529868887346551, guid: c242e6b3a2a6d6342a60115faa4b599d,
       type: 3}
