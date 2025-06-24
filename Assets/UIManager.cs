@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
 
     private void UpdatePoints(int value)
     {
-        pointsText.text = $"Puntos: {value}";
+        pointsText.text = $"R: {value} $";
     }
 
     private void UpdateState(PointManager.GameState state)
