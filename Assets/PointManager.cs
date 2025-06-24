@@ -13,7 +13,7 @@ public class PointManager : MonoBehaviour
 
     private float allLanesBlockedTime = 0f;
     private float timer = 0f;
-    [SerializeField] private float maxGameTime = 300f; // 5 minutos por ejemplo
+    [SerializeField] private float maxGameTime = 300f; // 5 minutos
 
     public event Action<int> OnPointsUpdated;
     public event Action<GameState> OnGameStateChanged;
@@ -32,8 +32,6 @@ public class PointManager : MonoBehaviour
             return;
 
         timer += Time.deltaTime;
-        Debug.Log("Evaluando puntos...");
-        Debug.Log($"Total puntos: {currentPoints}");
 
         AccumulatePoints();
         CheckUnlocks();
@@ -61,7 +59,6 @@ public class PointManager : MonoBehaviour
         {
             currentPoints += pointsGained;
             pointsAccumulator -= pointsGained;
-            Debug.Log($"Puntos ganados acumulados: {pointsGained}, Total puntos: {currentPoints}");
             OnPointsUpdated?.Invoke(currentPoints);
         }
     }
@@ -99,26 +96,22 @@ public class PointManager : MonoBehaviour
             if (currentState == GameState.Calm)
             {
                 currentState = GameState.Wave1;
-                Debug.Log("Oleada 1 iniciada");
             }
         }
 
         if ((currentPoints >= 300 || IsUnlocked(3)) && currentState == GameState.BetweenWaves)
         {
             currentState = GameState.Wave2;
-            Debug.Log("Oleada 2 iniciada");
         }
 
         if (AllLanesBlockedForSeconds(10) || currentPoints >= 500)
         {
             currentState = GameState.Victory;
-            Debug.Log("¡Victoria!");
         }
 
         if (timer >= maxGameTime)
         {
             currentState = GameState.GameOver;
-            Debug.Log("¡Derrota por tiempo!");
         }
 
         if (currentState != previousState)
@@ -170,11 +163,14 @@ public class PointManager : MonoBehaviour
             obj.CooldownTimer = obj.CooldownTime;
     }
 
-
-
     public float GetTimeLeft()
     {
         return Mathf.Max(0, maxGameTime - timer);
     }
 
+    public float GetMaxTime()
+    {
+        return maxGameTime;
+    }
 }
+

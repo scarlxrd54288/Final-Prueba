@@ -92,7 +92,7 @@ public class CarController : MonoBehaviour
         // Raycast solo si ya terminó el tiempo de gracia
         if (spawnTimer <= 0f)
         {
-            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.5f))
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.8f))
             {
                 Obstacle obs = hit.collider.GetComponent<Obstacle>();
                 if (obs != null)

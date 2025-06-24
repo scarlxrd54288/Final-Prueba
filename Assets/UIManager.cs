@@ -1,19 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public TMP_Text pointsText;
     public TMP_Text stateText;
-    public TMP_Text timerText; // NUEVO campo para el tiempo
+
+    // En lugar de texto, ahora usas un Slider
+    public Slider timerSlider;
+
     public Transform cooldownContainer;
+
+    private float maxTime;
 
     private void Start()
     {
         PointManager.Instance.OnPointsUpdated += UpdatePoints;
         PointManager.Instance.OnGameStateChanged += UpdateState;
+
+        // Asume que el tiempo total de la partida está fijo al inicio
+        maxTime = PointManager.Instance.GetMaxTime();
+        timerSlider.maxValue = maxTime;
+        timerSlider.minValue = 0;
     }
 
     private void UpdatePoints(int value)
@@ -56,20 +67,19 @@ public class UIManager : MonoBehaviour
                 icon.UpdateCooldown();
         }
 
-        // Mostrar tiempo restante si no ha terminado
+        // Actualizar slider si el juego sigue en curso
         if (PointManager.Instance.currentState != PointManager.GameState.Victory &&
             PointManager.Instance.currentState != PointManager.GameState.GameOver)
         {
             float timeLeft = PointManager.Instance.GetTimeLeft();
-            int minutes = Mathf.FloorToInt(timeLeft / 60f);
-            int seconds = Mathf.FloorToInt(timeLeft % 60f);
-            timerText.text = $"Tiempo: {minutes:00}:{seconds:00}";
+            timerSlider.value = timeLeft;
         }
         else
         {
-            timerText.text = ""; // Ocultar si ya terminó
+            timerSlider.gameObject.SetActive(false); // Oculta si el juego termina
         }
     }
 }
+
 
 
