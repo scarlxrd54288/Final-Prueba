@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class Obstacle : MonoBehaviour
 {
     [SerializeField] private float maxResistance = 1f;
@@ -13,8 +14,22 @@ public class Obstacle : MonoBehaviour
     public delegate void ObstacleDestroyedHandler(Obstacle obstacle);
     public event ObstacleDestroyedHandler OnObstacleDestroyed;
 
+    private int poolID;
+    public int PoolID => poolID;
+
+    public void SetPoolID(int id)
+    {
+        poolID = id;
+    }
+
     private void Awake()
     {
+        currentResistance = maxResistance;
+    }
+
+    private void OnEnable()
+    {
+        // Reinicia resistencia cada vez que el objeto se active desde el pool
         currentResistance = maxResistance;
     }
 
@@ -31,7 +46,7 @@ public class Obstacle : MonoBehaviour
     private void DestroyObstacle()
     {
         OnObstacleDestroyed?.Invoke(this);
-        Destroy(gameObject);
+        ObjectPoolManager.Instance.ReturnObject(gameObject, poolID);
     }
 
     public void Evolve(int newLevel, float newMaxResistance)
@@ -45,4 +60,3 @@ public class Obstacle : MonoBehaviour
 
     public bool IsDestroyed() => currentResistance <= 0;
 }
-

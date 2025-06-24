@@ -124,7 +124,9 @@ public class PlacementSystem : MonoBehaviour
 
         source.Play();
 
-        GameObject newObject = Instantiate(objData.Prefab);
+        //GameObject newObject = Instantiate(objData.Prefab);
+        GameObject newObject = ObjectPoolManager.Instance.GetObject(objData.Prefab, objData.ID);
+
         newObject.transform.position = grid.CellToWorld(gridPosition);
 
         //  Iniciar cooldown
@@ -133,8 +135,10 @@ public class PlacementSystem : MonoBehaviour
         // Configurar resistencia si es obstáculo
         Obstacle obstacle = newObject.GetComponent<Obstacle>();
         if (obstacle != null)
+        {
+            obstacle.SetPoolID(objData.ID);
             obstacle.Evolve(0, objData.BaseResistance);
-
+        }
         placedGameObject.Add(newObject);
 
         globalGridData.AddObjectAt(
