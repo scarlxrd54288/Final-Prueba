@@ -21,7 +21,7 @@ MonoBehaviour:
     <BaseResistance>k__BackingField: 2
     ResistancePerLevel: 
     <UnlockCost>k__BackingField: 0
-    <Unlocked>k__BackingField: 0
+    <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 3
     CooldownTimer: 0
     <BlocksCars>k__BackingField: 0
@@ -30,12 +30,12 @@ MonoBehaviour:
   - <Name>k__BackingField: yute
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 6756760452808445644, guid: 76ba4487b292b8441aba1f10c13b53d9,
+    <Prefab>k__BackingField: {fileID: 7482719005667537386, guid: 77d96ec0f557faa4ca9f0c90110aaa4d,
       type: 3}
     <BaseResistance>k__BackingField: 3
     ResistancePerLevel: 
     <UnlockCost>k__BackingField: 3
-    <Unlocked>k__BackingField: 0
+    <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 5
     CooldownTimer: 0
     <BlocksCars>k__BackingField: 0
@@ -44,12 +44,12 @@ MonoBehaviour:
   - <Name>k__BackingField: caja
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 4958611732165046154, guid: f817e3abded4f0243963c42b3eaf18de,
+    <Prefab>k__BackingField: {fileID: 7633244110563292547, guid: f817e3abded4f0243963c42b3eaf18de,
       type: 3}
     <BaseResistance>k__BackingField: 5
     ResistancePerLevel: 
     <UnlockCost>k__BackingField: 5
-    <Unlocked>k__BackingField: 0
+    <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 8
     CooldownTimer: 0
     <BlocksCars>k__BackingField: 0
@@ -58,42 +58,42 @@ MonoBehaviour:
   - <Name>k__BackingField: llanta
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 1142274010608674892, guid: dc408e8dc2c498040ac32207fb5d186b,
+    <Prefab>k__BackingField: {fileID: 7988791747589783819, guid: dc408e8dc2c498040ac32207fb5d186b,
       type: 3}
     <BaseResistance>k__BackingField: 9
     ResistancePerLevel: 
     <UnlockCost>k__BackingField: 8
-    <Unlocked>k__BackingField: 0
+    <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 10
-    CooldownTimer: 3.3580296
+    CooldownTimer: 2.1623645
     <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 0
   - <Name>k__BackingField: tronco
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 5073911279267381768, guid: 8b0bd49eacdcb3544baf43178356ba6e,
+    <Prefab>k__BackingField: {fileID: 7193580031783461337, guid: 8b0bd49eacdcb3544baf43178356ba6e,
       type: 3}
     <BaseResistance>k__BackingField: 12
     ResistancePerLevel: 
     <UnlockCost>k__BackingField: 8
-    <Unlocked>k__BackingField: 0
+    <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 10
-    CooldownTimer: 3.3580296
+    CooldownTimer: 0
     <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 0
   - <Name>k__BackingField: contenedor
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 1, y: 1}
-    <Prefab>k__BackingField: {fileID: 6417034661791708079, guid: c242e6b3a2a6d6342a60115faa4b599d,
+    <Prefab>k__BackingField: {fileID: 4611529868887346551, guid: c242e6b3a2a6d6342a60115faa4b599d,
       type: 3}
     <BaseResistance>k__BackingField: 15
     ResistancePerLevel: 
     <UnlockCost>k__BackingField: 8
-    <Unlocked>k__BackingField: 0
+    <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 10
-    CooldownTimer: 3.3580296
+    CooldownTimer: 0
     <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 0
