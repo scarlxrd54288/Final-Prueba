@@ -79,7 +79,7 @@ MonoBehaviour:
     <UnlockCost>k__BackingField: 8
     <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 10
-    CooldownTimer: 0
+    CooldownTimer: 0.43596798
     <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 0
@@ -93,7 +93,7 @@ MonoBehaviour:
     <UnlockCost>k__BackingField: 8
     <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 10
-    CooldownTimer: 0
+    CooldownTimer: 5.528425
     <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 0
