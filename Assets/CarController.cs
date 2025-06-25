@@ -99,6 +99,7 @@ public class CarController : MonoBehaviour
                 {
                     currentObstacle = obs;
                     isStopped = true;
+                    AudioManager.Instance.PlayCrashSound();
                     return;
                 }
 
@@ -107,6 +108,7 @@ public class CarController : MonoBehaviour
                 {
                     isStopped = true;
                     currentObstacle = null;
+                    AudioManager.Instance.PlayCrashSound();
                     return;
                 }
             }
