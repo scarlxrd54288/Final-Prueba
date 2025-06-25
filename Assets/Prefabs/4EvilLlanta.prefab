@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5287545881457211130}
   m_Layer: 0
   m_Name: 4EvilLlanta
-  m_TagString: Untagged
+  m_TagString: eObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,6 +95,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 4llanta
+      objectReference: {fileID: 0}
+    - target: {fileID: 7988791747589783819, guid: dc408e8dc2c498040ac32207fb5d186b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

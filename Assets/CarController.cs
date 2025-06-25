@@ -83,24 +83,30 @@ public class CarController : MonoBehaviour
         {
             Move();
 
-            // Daño por colisión con obstáculos con daño
+            // Comprobamos si hay un obstáculo ofensivo enfrente
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.6f))
             {
                 Obstacle obs = hit.collider.GetComponent<Obstacle>();
-                if (obs != null && obs.Damage > 0f)
+                if (obs != null && obs.IsOffensive())
                 {
-                    TakeDamage(obs.Damage * Time.deltaTime);
+                    obs.ApplyDamageToCar(this);
+                    return; // El auto solo recibe daño, NO ataca
                 }
             }
         }
-
         else
         {
-            Attack();
+            // Si estamos detenidos y el obstáculo NO es ofensivo, lo atacamos
+            if (currentObstacle != null && !currentObstacle.IsOffensive())
+            {
+                Attack();
+            }
+            // Si es ofensivo, no hacemos nada: solo esperamos y recibimos daño por raycast
         }
 
         CheckOutOfBounds();
     }
+
 
     void Move()
     {
@@ -110,6 +116,7 @@ public class CarController : MonoBehaviour
         Vector3Int nextCell = grid.WorldToCell(targetPosition);
 
         // Raycast solo si ya terminó el tiempo de gracia
+        
         if (spawnTimer <= 0f)
         {
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.8f))
@@ -133,31 +140,38 @@ public class CarController : MonoBehaviour
                 }
             }
         }
-
+        
         if (nextCell != currentCell)
         {
+            /*
             if (carTrafficData.HasObjectAt(nextCell))
             {
                 isStopped = true;
                 currentObstacle = null;
                 return;
             }
-
+            */
             transform.position = targetPosition;
             carTrafficData.RemoveObjectAt(currentCell);
             carTrafficData.AddObjectAt(nextCell, Vector2Int.one, -1, -1, GridObjectType.Car);
             currentCell = nextCell;
         }
+        
         else
         {
             transform.position = targetPosition;
         }
+        
     }
 
     void Attack()
     {
+        if (currentHealth <= 0)
+            return;
+
         if (currentObstacle == null || currentObstacle.IsDestroyed())
         {
+            Debug.Log($"{name} deja de atacar porque el obstáculo está destruido o no existe.");
             isStopped = false;
             currentObstacle = null;
 
@@ -168,8 +182,17 @@ public class CarController : MonoBehaviour
             return;
         }
 
+        Debug.Log($"{name} está atacando a {currentObstacle.gameObject.name} con daño {damage * Time.deltaTime}");
+
+        if (currentObstacle.IsOffensive())
+        {
+            Debug.Log($"{name} no ataca porque el obstáculo es ofensivo.");
+            return;
+        }
+
         currentObstacle.TakeDamage(damage * Time.deltaTime);
     }
+
 
     void TryResumeMovement()
     {
@@ -178,7 +201,7 @@ public class CarController : MonoBehaviour
 
         RaycastHit hit;
         bool obstacleCleared = !Physics.Raycast(transform.position, direction, out hit, 0.5f);
-
+        /*
         if (!obstacleCleared)
         {
             Debug.Log($"{name} [TryResume] nextCell: {nextCell}, occupied: {carTrafficData.HasObjectAt(nextCell)}, rayHit: True, objectHit: {hit.collider.gameObject.name}");
@@ -187,13 +210,13 @@ public class CarController : MonoBehaviour
         {
             Debug.Log($"{name} [TryResume] nextCell: {nextCell}, occupied: {carTrafficData.HasObjectAt(nextCell)}, rayHit: False");
         }
-
+        */
         bool cellFree = !carTrafficData.HasObjectAt(nextCell);
         if (cellFree && obstacleCleared)
         {
             isStopped = false;
             currentObstacle = null;
-            Debug.Log($"{gameObject.name} desbloqueado, reanuda movimiento");
+            //Debug.Log($"{gameObject.name} desbloqueado, reanuda movimiento");
         }
     }
 
@@ -232,7 +255,7 @@ public class CarController : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + direction.normalized * 1.5f);
     }
 
-    private void TakeDamage(float amount)
+    public void ReceiveDamage(float amount)
     {
         currentHealth -= amount;
         if (currentHealth <= 0)

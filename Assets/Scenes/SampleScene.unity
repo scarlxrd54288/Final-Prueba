@@ -5312,9 +5312,9 @@ MonoBehaviour:
   lanes:
   - spawnPoint: {fileID: 1498019549}
     direction: {x: -1, y: 0, z: 0}
-    speed: 1
+    speed: 0.5
     active: 1
-    baseSpawnInterval: 2
+    baseSpawnInterval: 3
     currentTimer: 0
     activeCars: []
   - spawnPoint: {fileID: 2109427118}
@@ -5328,12 +5328,12 @@ MonoBehaviour:
     direction: {x: -1, y: 0, z: 0}
     speed: 3
     active: 1
-    baseSpawnInterval: 2
+    baseSpawnInterval: 3
     currentTimer: 0
     activeCars: []
   - spawnPoint: {fileID: 1784280713}
     direction: {x: -1, y: 0, z: 0}
-    speed: 4
+    speed: 3
     active: 1
     baseSpawnInterval: 2
     currentTimer: 0
@@ -9020,6 +9020,7 @@ MonoBehaviour:
   database: {fileID: 11400000, guid: 1582e1b0a1a8f0a44b6fcd7c4fb88cb5, type: 2}
   gridVisualization: {fileID: 1322702808}
   preview: {fileID: 2013450453}
+  cellIndicator: {fileID: 1327694966}
 --- !u!1 &1498019548
 GameObject:
   m_ObjectHideFlags: 0

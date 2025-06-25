@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 416133894490372522}
   m_Layer: 0
   m_Name: 6EvilContenedor
-  m_TagString: Untagged
+  m_TagString: eObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,6 +45,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 6contenedor
+      objectReference: {fileID: 0}
+    - target: {fileID: 4611529868887346551, guid: c242e6b3a2a6d6342a60115faa4b599d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4748707490804082364, guid: c242e6b3a2a6d6342a60115faa4b599d,
         type: 3}

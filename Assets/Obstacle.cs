@@ -19,6 +19,10 @@ public class Obstacle : MonoBehaviour
 
     [SerializeField] private float damage = 0f;
     public float Damage => damage;
+    [SerializeField] private int durability = -1; // -1 = infinito
+    private int damageCount = 0;
+
+    private int hitCount = 0;
 
 
     public void SetPoolID(int id)
@@ -39,10 +43,13 @@ public class Obstacle : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
+        Debug.Log($"{gameObject.name} recibe {amount} de daño. Resistencia actual: {currentResistance} -> {currentResistance - amount}");
+
         currentResistance -= amount;
         if (currentResistance <= 0)
         {
             currentResistance = 0;
+            Debug.Log($"{gameObject.name} fue destruido!");
             DestroyObstacle();
         }
     }
@@ -53,7 +60,7 @@ public class Obstacle : MonoBehaviour
         ObjectPoolManager.Instance.ReturnObject(gameObject, poolID);
     }
 
-    public void Evolve(int newLevel, float newMaxResistance, float newDamage = 0f)
+    public void Evolve(int newLevel, float newMaxResistance, float newDamage = 0f, int newDurability = -1)
     {
         if (newLevel < evolutionLevel) return;
 
@@ -61,8 +68,44 @@ public class Obstacle : MonoBehaviour
         maxResistance = newMaxResistance;
         currentResistance = maxResistance;
         damage = newDamage;
+        durability = newDurability;
+        hitCount = 0;
     }
 
 
+
     public bool IsDestroyed() => currentResistance <= 0;
+
+    public void SetDurability(int value)
+    {
+        durability = value;
+        damageCount = 0;
+    }
+
+    public void ApplyDamageToCar(CarController car)
+    {
+        if (damage <= 0f) return;
+
+        if (car == null) return; // seguridad adicional
+
+        car.ReceiveDamage(damage * Time.deltaTime);
+
+        if (durability > 0)
+        {
+            damageCount++;
+            if (damageCount >= durability)
+            {
+                DestroyObstacle();
+            }
+        }
+    }
+
+
+    public bool IsOffensive()
+    {
+        //return Evolved;
+        return damage > 0f;
+    }
+
+
 }

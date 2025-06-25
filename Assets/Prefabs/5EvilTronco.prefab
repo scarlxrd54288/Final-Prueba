@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5444562069447654835}
   m_Layer: 0
   m_Name: 5EvilTronco
-  m_TagString: Untagged
+  m_TagString: eObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,6 +95,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 5tronco
+      objectReference: {fileID: 0}
+    - target: {fileID: 7193580031783461337, guid: 8b0bd49eacdcb3544baf43178356ba6e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 567291638850664318}
   m_Layer: 0
   m_Name: 3EvilCaja
-  m_TagString: Untagged
+  m_TagString: eObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,6 +95,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 3caja
+      objectReference: {fileID: 0}
+    - target: {fileID: 7633244110563292547, guid: f817e3abded4f0243963c42b3eaf18de,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

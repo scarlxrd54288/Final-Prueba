@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - cursor
+  - eObstacle
+  - Obstacle
+  - Car
   layers:
   - Default
   - TransparentFX

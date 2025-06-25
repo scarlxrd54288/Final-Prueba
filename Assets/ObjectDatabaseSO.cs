@@ -20,6 +20,8 @@ public class ObjectData
 
     [field: SerializeField] public int BaseResistance { get; private set; } = 1;
     [field: SerializeField] public int[] ResistancePerLevel;
+    [field: SerializeField] public float EvolvedResistance { get; private set; }
+    [field: SerializeField] public float EvolvedDamage { get; private set; }
 
     [field: SerializeField] public int UnlockCost { get; private set; }
     [field: SerializeField] public bool Unlocked { get; set; }
@@ -27,14 +29,14 @@ public class ObjectData
     [field: SerializeField] public float CooldownTime { get; private set; }
     [HideInInspector] public float CooldownTimer;
 
-    [field: SerializeField] public bool BlocksCars { get; private set; }
+    //[field: SerializeField] public bool BlocksCars { get; private set; }
     [field: SerializeField] public bool IsOffensive { get; private set; }
     [field: SerializeField] public int Durability { get; private set; }
 
     public bool Evolved = false;
     public int EvolutionPoints;
     public GameObject EvolvedPrefab;
+    public int EvolutionLevel;
 
-    [field: SerializeField] public float EvolvedResistance { get; private set; }  
-    [field: SerializeField] public float EvolvedDamage { get; private set; }
+
 }

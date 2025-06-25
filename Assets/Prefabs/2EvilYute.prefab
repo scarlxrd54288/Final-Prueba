@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 5186106588326441653}
   m_Layer: 0
   m_Name: 2EvilYute
-  m_TagString: Untagged
+  m_TagString: eObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

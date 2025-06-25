@@ -429,7 +429,7 @@ GameObject:
   - component: {fileID: 9191923796918126188}
   m_Layer: 0
   m_Name: 1piedras
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -470,6 +470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxResistance: 1
   evolutionLevel: 0
+  damage: 0
 --- !u!54 &7323298013319538265
 Rigidbody:
   m_ObjectHideFlags: 0

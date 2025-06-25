@@ -5,40 +5,38 @@ using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
 {
+    //Esfera--------
     [SerializeField]
     private GameObject mouseIndicator;
     [SerializeField]
+    //Script posicionar--------------
     private InputManager inputManager;
+    //Grilla--------
     [SerializeField]
     private Grid grid;
 
-
+    //ScriptableObject de los obstaculos
     [SerializeField]
     private ObjectDatabaseSO database;
+    //ID del objeto seleccionado
     private int selectedObjectIndex = -1;
-
+    //Material Grilla
     [SerializeField]
     private GameObject gridVisualization;
 
-    /*[SerializeField]
-    private AudioSource source;*/
-
-    //private GridData floorData, furnitureData;
-
-    //Aumento----
-    //private GridData carTrafficData;
+    //Script del GRidData - solo lectura
     [SerializeField] private GridData globalGridData;
     public GridData GlobalGridData => globalGridData;
-
-    //private Renderer previewRenderer;
-
+    //Lista de objetos que se utilizan en la escena--
     private List<GameObject> placedGameObject = new();
-
+    //Script de preview
     [SerializeField]
     private PreviewSystem preview;
-
+    //Ültima posicion detectada
     private Vector3Int lastDetectedPosition = Vector3Int.zero;
-
+    //Indicador de celda
+    [SerializeField]
+    private GameObject cellIndicator;
 
     private void Awake()
     {
@@ -56,12 +54,7 @@ public class PlacementSystem : MonoBehaviour
     void Start()
     {
         StopPlacement();
-        //floorData = new();
-        //furnitureData = new();
-        //Aumento---
-        //carTrafficData = new GridData();
-
-        //previewRenderer = cellIndicator.GetComponentInChildren<Renderer>();
+        
     }
 
     public void StartPlacement(int ID)
@@ -74,11 +67,11 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
         gridVisualization.SetActive(true);
-        //cellIndicator.SetActive(true);
+        cellIndicator.SetActive(true);
         preview.StartShowingPlacementPreview(
             database.objectsData[selectedObjectIndex].Prefab,
             database.objectsData[selectedObjectIndex].Size);
-        inputManager.OnClicked += PlaceStructure;
+        inputManager.OnClicked += PlaceStructure;//Mientras
         inputManager.OnExit += StopPlacement;
     }
 
@@ -86,14 +79,16 @@ public class PlacementSystem : MonoBehaviour
     {
         selectedObjectIndex = -1;
         gridVisualization.SetActive(false);
-        //cellIndicator.SetActive(false);
+        cellIndicator.SetActive(false);
         preview.StopShowingPreview();
-        inputManager.OnClicked -= PlaceStructure;
+        inputManager.OnClicked -= PlaceStructure;//Mientras
         inputManager.OnExit -= StopPlacement;
         lastDetectedPosition = Vector3Int.zero;
     }
+
     private void PlaceStructure()
     {
+        //VAlidaciones--------------------
         if (inputManager.IsPointerOverUI())
             return;
 
@@ -101,25 +96,24 @@ public class PlacementSystem : MonoBehaviour
             return;
 
         var objData = database.objectsData[selectedObjectIndex];
+        var type = GridObjectType.Obstacle;
 
-        //Desactivar esto para Cool Down---------------
+
         // Verificar si el objeto está desbloqueado antes de colocarlo
         if (!objData.Unlocked || objData.CooldownTimer > 0f)
         {
             Debug.Log($"[PlacementSystem] Objeto bloqueado o en cooldown: {objData.Name}");
             AudioManager.Instance.PlayPlaceErrorSound();
-            StopPlacement();              //  Anula selección
-            preview.StopShowingPreview(); //  Apaga la vista previa
+            StopPlacement();              
+            preview.StopShowingPreview(); 
             return;
         }
-
 
 
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
-        var type = objData.ID == 0 ? GridObjectType.Floor : GridObjectType.Furniture;
-
+       
         if (!globalGridData.CanPlaceObjectAt(gridPosition, objData.Size, type))
         {
             AudioManager.Instance.PlayPlaceErrorSound(); 
@@ -127,11 +121,9 @@ public class PlacementSystem : MonoBehaviour
         }
 
 
-        //source.Play();
         AudioManager.Instance.PlayPlaceObjectSound();
 
 
-        //GameObject newObject = Instantiate(objData.Prefab);
         GameObject prefabToUse = objData.Evolved && objData.EvolvedPrefab != null
             ? objData.EvolvedPrefab
             : objData.Prefab;
@@ -140,10 +132,10 @@ public class PlacementSystem : MonoBehaviour
 
         newObject.transform.position = grid.CellToWorld(gridPosition);
 
-        //  Iniciar cooldown
+        //Inicia cooldown---------------------------
         objData.CooldownTimer = objData.CooldownTime;
 
-        // Configurar resistencia si es obstáculo
+        //Configura resistencia--------------------------------
         Obstacle obstacle = newObject.GetComponent<Obstacle>();
         if (obstacle != null)
         {
@@ -171,29 +163,14 @@ public class PlacementSystem : MonoBehaviour
     }
 
 
-
-
-
-
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
     {
-        //Original
-        /*GridData selectedData = database.objectsData[selectedObjectIndex].ID == 0 ? floorData : furnitureData;
-
-        return selectedData.CanPlaceObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
-        */
         var objData = database.objectsData[selectedObjectIndex];
-        var type = objData.ID == 0 ? GridObjectType.Floor : GridObjectType.Furniture;
-
+        var type = GridObjectType.Obstacle;
         return globalGridData.CanPlaceObjectAt(gridPosition, objData.Size, type);
          
     }
 
-    //Aumento---------------
-    /*public void SetCarTrafficData(GridData data)
-    {
-        carTrafficData = data;
-    }*/
 
 
     private void Update()
@@ -214,13 +191,5 @@ public class PlacementSystem : MonoBehaviour
         }
         
     }
-
-   
-
-
-
-
-
-
 
 }

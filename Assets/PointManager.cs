@@ -185,9 +185,21 @@ public class PointManager : MonoBehaviour
             {
                 obj.Evolved = true;
                 OnObstacleEvolutionTriggered?.Invoke(obj.ID);
+
+                // Buscar todos los obstáculos activos con ese ID y evolucionarlos
+                foreach (var go in FindObjectsOfType<Obstacle>())
+                {
+                    if (go.PoolID == obj.ID) // Asegúrate que PoolID se haya asignado bien
+                    {
+                        go.Evolve(obj.EvolutionLevel, obj.BaseResistance, obj.EvolvedDamage, obj.Durability);
+                        Debug.Log($"[PointManager] Objeto ID {obj.ID} evolucionado en escena con nuevo daño: {obj.EvolvedDamage}");
+                    }
+                }
             }
+
         }
     }
+
 
 }
 

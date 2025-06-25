@@ -30,7 +30,7 @@ public class Lane
             if (car.IsStopped())
             {
                 count++;
-                Debug.Log($"Auto bloqueado: {car.name}");
+                //Debug.Log($"Auto bloqueado: {car.name}");
             }
         }
 

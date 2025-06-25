@@ -20,19 +20,19 @@ MonoBehaviour:
       type: 3}
     <BaseResistance>k__BackingField: 2
     ResistancePerLevel: 
+    <EvolvedResistance>k__BackingField: 2
+    <EvolvedDamage>k__BackingField: 2
     <UnlockCost>k__BackingField: 0
     <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 3
     CooldownTimer: 0
-    <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
-    <Durability>k__BackingField: 0
-    Evolved: 0
-    EvolutionPoints: 100
+    <Durability>k__BackingField: 2
+    Evolved: 1
+    EvolutionPoints: 10
     EvolvedPrefab: {fileID: 7668823987891448717, guid: 7fd9566f70481da42bdd8c198bdcf3b5,
       type: 3}
-    <EvolvedResistance>k__BackingField: 0
-    <EvolvedDamage>k__BackingField: 0
+    EvolutionLevel: 0
   - <Name>k__BackingField: yute
     <ID>k__BackingField: 1
     <Size>k__BackingField: {x: 1, y: 1}
@@ -40,19 +40,19 @@ MonoBehaviour:
       type: 3}
     <BaseResistance>k__BackingField: 3
     ResistancePerLevel: 
+    <EvolvedResistance>k__BackingField: 3
+    <EvolvedDamage>k__BackingField: 3
     <UnlockCost>k__BackingField: 3
     <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 5
     CooldownTimer: 0
-    <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
-    <Durability>k__BackingField: 0
-    Evolved: 0
+    <Durability>k__BackingField: 3
+    Evolved: 1
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 3560548354747551731, guid: a5e9236ca1dd9614a980949a10b252b5,
       type: 3}
-    <EvolvedResistance>k__BackingField: 0
-    <EvolvedDamage>k__BackingField: 0
+    EvolutionLevel: 0
   - <Name>k__BackingField: caja
     <ID>k__BackingField: 2
     <Size>k__BackingField: {x: 1, y: 1}
@@ -60,19 +60,19 @@ MonoBehaviour:
       type: 3}
     <BaseResistance>k__BackingField: 5
     ResistancePerLevel: 
+    <EvolvedResistance>k__BackingField: 4
+    <EvolvedDamage>k__BackingField: 4
     <UnlockCost>k__BackingField: 5
     <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 8
     CooldownTimer: 0
-    <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
-    <Durability>k__BackingField: 0
-    Evolved: 0
+    <Durability>k__BackingField: 4
+    Evolved: 1
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 93218428106817745, guid: bda3e0419b6d1dc4189985bf17b27180,
       type: 3}
-    <EvolvedResistance>k__BackingField: 0
-    <EvolvedDamage>k__BackingField: 0
+    EvolutionLevel: 0
   - <Name>k__BackingField: llanta
     <ID>k__BackingField: 3
     <Size>k__BackingField: {x: 1, y: 1}
@@ -80,19 +80,19 @@ MonoBehaviour:
       type: 3}
     <BaseResistance>k__BackingField: 9
     ResistancePerLevel: 
+    <EvolvedResistance>k__BackingField: 6
+    <EvolvedDamage>k__BackingField: 6
     <UnlockCost>k__BackingField: 8
     <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 10
     CooldownTimer: 0
-    <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
-    <Durability>k__BackingField: 0
-    Evolved: 0
+    <Durability>k__BackingField: 6
+    Evolved: 1
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 8243235272967504713, guid: 0caed758852999846b883d0542cb7922,
       type: 3}
-    <EvolvedResistance>k__BackingField: 0
-    <EvolvedDamage>k__BackingField: 0
+    EvolutionLevel: 0
   - <Name>k__BackingField: tronco
     <ID>k__BackingField: 4
     <Size>k__BackingField: {x: 1, y: 1}
@@ -100,19 +100,19 @@ MonoBehaviour:
       type: 3}
     <BaseResistance>k__BackingField: 12
     ResistancePerLevel: 
+    <EvolvedResistance>k__BackingField: 8
+    <EvolvedDamage>k__BackingField: 8
     <UnlockCost>k__BackingField: 8
     <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 10
     CooldownTimer: 0
-    <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
-    <Durability>k__BackingField: 0
-    Evolved: 0
+    <Durability>k__BackingField: 8
+    Evolved: 1
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 5046852378026133806, guid: c994984c0d7ca914a87cbe35effab3a8,
       type: 3}
-    <EvolvedResistance>k__BackingField: 0
-    <EvolvedDamage>k__BackingField: 0
+    EvolutionLevel: 0
   - <Name>k__BackingField: contenedor
     <ID>k__BackingField: 5
     <Size>k__BackingField: {x: 1, y: 1}
@@ -120,16 +120,16 @@ MonoBehaviour:
       type: 3}
     <BaseResistance>k__BackingField: 15
     ResistancePerLevel: 
+    <EvolvedResistance>k__BackingField: 10
+    <EvolvedDamage>k__BackingField: 10
     <UnlockCost>k__BackingField: 8
     <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 10
     CooldownTimer: 0
-    <BlocksCars>k__BackingField: 0
     <IsOffensive>k__BackingField: 0
-    <Durability>k__BackingField: 0
-    Evolved: 0
+    <Durability>k__BackingField: 10
+    Evolved: 1
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 4078420274951205110, guid: 316c1a6c16a44b544811a6aad7912458,
       type: 3}
-    <EvolvedResistance>k__BackingField: 0
-    <EvolvedDamage>k__BackingField: 0
+    EvolutionLevel: 0
