@@ -20,8 +20,8 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     private GameObject gridVisualization;
 
-    [SerializeField]
-    private AudioSource source;
+    /*[SerializeField]
+    private AudioSource source;*/
 
     //private GridData floorData, furnitureData;
 
@@ -107,6 +107,7 @@ public class PlacementSystem : MonoBehaviour
         if (!objData.Unlocked || objData.CooldownTimer > 0f)
         {
             Debug.Log($"[PlacementSystem] Objeto bloqueado o en cooldown: {objData.Name}");
+            AudioManager.Instance.PlayPlaceErrorSound();
             StopPlacement();              //  Anula selección
             preview.StopShowingPreview(); //  Apaga la vista previa
             return;
@@ -120,9 +121,15 @@ public class PlacementSystem : MonoBehaviour
         var type = objData.ID == 0 ? GridObjectType.Floor : GridObjectType.Furniture;
 
         if (!globalGridData.CanPlaceObjectAt(gridPosition, objData.Size, type))
+        {
+            AudioManager.Instance.PlayPlaceErrorSound(); 
             return;
+        }
 
-        source.Play();
+
+        //source.Play();
+        AudioManager.Instance.PlayPlaceObjectSound();
+
 
         //GameObject newObject = Instantiate(objData.Prefab);
         GameObject newObject = ObjectPoolManager.Instance.GetObject(objData.Prefab, objData.ID);
