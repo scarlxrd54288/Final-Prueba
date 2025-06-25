@@ -27,6 +27,15 @@ public class CarController : MonoBehaviour
     // Evento que avisa cuando el auto se retira
     public event Action OnCarRemoved;
 
+    [SerializeField] private float maxHealth = 10f;
+    private float currentHealth;
+
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+    }
+
+
     public void Initialize(Vector3 direction, float speed, float damagePerSecond, int typeIndex, CarPoolManager poolManager, GridData carTrafficData, Grid grid)
     {
         this.direction = new Vector3(direction.x, 0f, direction.z).normalized;
@@ -73,7 +82,18 @@ public class CarController : MonoBehaviour
         if (!isStopped)
         {
             Move();
+
+            // Daño por colisión con obstáculos con daño
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.6f))
+            {
+                Obstacle obs = hit.collider.GetComponent<Obstacle>();
+                if (obs != null && obs.Damage > 0f)
+                {
+                    TakeDamage(obs.Damage * Time.deltaTime);
+                }
+            }
         }
+
         else
         {
             Attack();
@@ -211,4 +231,17 @@ public class CarController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + direction.normalized * 1.5f);
     }
+
+    private void TakeDamage(float amount)
+    {
+        currentHealth -= amount;
+        if (currentHealth <= 0)
+        {
+            Debug.Log($"{gameObject.name} destruido por daño");
+            carTrafficData.RemoveObjectAt(currentCell);
+            poolManager.ReturnCarToPool(gameObject, typeIndex);
+            OnCarRemoved?.Invoke();
+        }
+    }
+
 }

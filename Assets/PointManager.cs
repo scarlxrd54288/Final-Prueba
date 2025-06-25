@@ -35,6 +35,7 @@ public class PointManager : MonoBehaviour
 
         AccumulatePoints();
         CheckUnlocks();
+        CheckEvolutions();
         UpdateCooldowns();
         UpdateGameState();
     }
@@ -172,5 +173,21 @@ public class PointManager : MonoBehaviour
     {
         return maxGameTime;
     }
+    
+    
+    public event Action<int> OnObstacleEvolutionTriggered; // ID del objeto
+
+    private void CheckEvolutions()
+    {
+        foreach (var obj in objectDatabase.objectsData)
+        {
+            if (!obj.Evolved && currentPoints >= obj.EvolutionPoints)
+            {
+                obj.Evolved = true;
+                OnObstacleEvolutionTriggered?.Invoke(obj.ID);
+            }
+        }
+    }
+
 }
 

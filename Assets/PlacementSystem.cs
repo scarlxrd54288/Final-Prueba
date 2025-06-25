@@ -132,7 +132,11 @@ public class PlacementSystem : MonoBehaviour
 
 
         //GameObject newObject = Instantiate(objData.Prefab);
-        GameObject newObject = ObjectPoolManager.Instance.GetObject(objData.Prefab, objData.ID);
+        GameObject prefabToUse = objData.Evolved && objData.EvolvedPrefab != null
+            ? objData.EvolvedPrefab
+            : objData.Prefab;
+
+        GameObject newObject = ObjectPoolManager.Instance.GetObject(prefabToUse, objData.ID);
 
         newObject.transform.position = grid.CellToWorld(gridPosition);
 
@@ -144,8 +148,11 @@ public class PlacementSystem : MonoBehaviour
         if (obstacle != null)
         {
             obstacle.SetPoolID(objData.ID);
-            obstacle.Evolve(0, objData.BaseResistance);
+            float resistance = objData.Evolved ? objData.EvolvedResistance : objData.BaseResistance;
+            float damage = objData.Evolved ? objData.EvolvedDamage : 0f;
+            obstacle.Evolve(objData.Evolved ? 1 : 0, resistance, damage);
         }
+
         placedGameObject.Add(newObject);
 
         globalGridData.AddObjectAt(

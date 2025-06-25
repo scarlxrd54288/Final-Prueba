@@ -13,45 +13,28 @@ public class ObjectDatabaseSO : ScriptableObject
 [Serializable]
 public class ObjectData
 {
-    [field: SerializeField]
-    public string Name { get; private set; }
-    [field: SerializeField] 
-    public int ID { get; private set; }
-    [field: SerializeField]
+    [field: SerializeField] public string Name { get; private set; }
+    [field: SerializeField] public int ID { get; private set; }
+    [field: SerializeField] public Vector2Int Size { get; private set; } = Vector2Int.one;
+    [field: SerializeField] public GameObject Prefab { get; private set; }
 
-    public Vector2Int Size { get; private set; } = Vector2Int.one;
-    [field: SerializeField]
+    [field: SerializeField] public int BaseResistance { get; private set; } = 1;
+    [field: SerializeField] public int[] ResistancePerLevel;
 
-    public GameObject Prefab { get; private set; }
+    [field: SerializeField] public int UnlockCost { get; private set; }
+    [field: SerializeField] public bool Unlocked { get; set; }
 
-    //Aumento
-    [field: SerializeField]
-    public int BaseResistance { get; private set; } = 1;
+    [field: SerializeField] public float CooldownTime { get; private set; }
+    [HideInInspector] public float CooldownTimer;
 
-    // Aquí puedes agregar un array o lista con stats de evolución:
-    // Por ejemplo, resistencia por nivel (índice 0 = base)
-    [field: SerializeField]
-    public int[] ResistancePerLevel;
+    [field: SerializeField] public bool BlocksCars { get; private set; }
+    [field: SerializeField] public bool IsOffensive { get; private set; }
+    [field: SerializeField] public int Durability { get; private set; }
 
-    [field: SerializeField]
-    public int UnlockCost { get; private set; }
+    public bool Evolved = false;
+    public int EvolutionPoints;
+    public GameObject EvolvedPrefab;
 
-    [field: SerializeField]
-    public bool Unlocked { get; set; } // puede ser set público para modificar en runtime
-
-    [field: SerializeField]
-    public float CooldownTime { get; private set; }
-
-    [HideInInspector]
-    public float CooldownTimer; // está bien oculto
-
-    [field: SerializeField]
-    public bool BlocksCars { get; private set; }
-
-    [field: SerializeField]
-    public bool IsOffensive { get; private set; }
-
-    [field: SerializeField]
-    public int Durability { get; private set; }
-
+    [field: SerializeField] public float EvolvedResistance { get; private set; }  
+    [field: SerializeField] public float EvolvedDamage { get; private set; }
 }
