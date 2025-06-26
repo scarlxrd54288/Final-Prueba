@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 329452427070705907}
   - component: {fileID: 5817789659068038555}
   m_Layer: 0
-  m_Name: 1EvilPiedra
+  m_Name: 11EvilPiedra
   m_TagString: eObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

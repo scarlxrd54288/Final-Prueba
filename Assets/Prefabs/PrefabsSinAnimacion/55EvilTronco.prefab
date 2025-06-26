@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4525062361667765837}
   - component: {fileID: 3996489662110046174}
   m_Layer: 0
-  m_Name: 5EvilTronco
+  m_Name: 55EvilTronco
   m_TagString: eObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

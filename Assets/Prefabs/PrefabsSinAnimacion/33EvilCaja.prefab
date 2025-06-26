@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8583688877052497808}
   - component: {fileID: 6077037460700164345}
   m_Layer: 0
-  m_Name: 3EvilCaja
+  m_Name: 33EvilCaja
   m_TagString: eObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

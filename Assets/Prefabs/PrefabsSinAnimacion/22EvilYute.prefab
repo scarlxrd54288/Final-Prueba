@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 3609013559169783989}
   - component: {fileID: 6532091706068511892}
   m_Layer: 0
-  m_Name: 2EvilYute
+  m_Name: 22EvilYute
   m_TagString: eObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
