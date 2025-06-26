@@ -46,11 +46,13 @@ public class GridData
         {
             if (placedObjects.TryGetValue(pos, out var existingData))
             {
-               //Quitar---------
-               /* 
-                if (existingData.objectType != GridObjectType.Car || placingType != GridObjectType.Car)
+                //Quitar---------
+                /* 
+                 if (existingData.objectType != GridObjectType.Car || placingType != GridObjectType.Car)
+                     return false;
+                */
+                if (existingData.objectType == GridObjectType.Car || existingData.objectType == GridObjectType.Obstacle)
                     return false;
-               */
             }
         }
         return true;
