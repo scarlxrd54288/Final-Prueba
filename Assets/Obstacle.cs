@@ -37,9 +37,16 @@ public class Obstacle : MonoBehaviour
 
     private void OnEnable()
     {
-        // Reinicia resistencia cada vez que el objeto se active desde el pool
         currentResistance = maxResistance;
+
+        // Revisa si está evolucionado y aplica solo si debe
+        if (PointManager.Instance.IsEvolved(poolID))
+        {
+            var data = PointManager.Instance.GetObjectData(poolID);
+            Evolve(data.EvolutionLevel, data.BaseResistance, data.EvolvedDamage, data.Durability);
+        }
     }
+
 
     public void TakeDamage(float amount)
     {

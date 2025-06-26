@@ -200,7 +200,7 @@ public class PointManager : MonoBehaviour
                 {
                     if (go.PoolID == obj.ID) // Asegúrate que PoolID se haya asignado bien
                     {
-                        go.Evolve(obj.EvolutionLevel, obj.BaseResistance, obj.EvolvedDamage, obj.Durability);
+                        //go.Evolve(obj.EvolutionLevel, obj.BaseResistance, obj.EvolvedDamage, obj.Durability);
                         Debug.Log($"[PointManager] Objeto ID {obj.ID} evolucionado en escena con nuevo daño: {obj.EvolvedDamage}");
                     }
                 }
@@ -208,6 +208,17 @@ public class PointManager : MonoBehaviour
 
         }
     }
+    public bool IsEvolved(int id)
+    {
+        var obj = objectDatabase.objectsData.Find(o => o.ID == id);
+        return obj != null && obj.Evolved;
+    }
+
+    public ObjectData GetObjectData(int id)
+    {
+        return objectDatabase.objectsData.Find(o => o.ID == id);
+    }
+
 
 
 }
