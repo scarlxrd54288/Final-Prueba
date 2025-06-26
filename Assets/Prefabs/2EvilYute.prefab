@@ -286,6 +286,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7527235220794068302}
+  - component: {fileID: 6202533908755101535}
   m_Layer: 0
   m_Name: 2yute 1
   m_TagString: Untagged
@@ -645,5 +646,30 @@ PrefabInstance:
     - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1715041776415068451, guid: c2207ca6faa3ff14d9cb48086644be15,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6202533908755101535}
   m_SourcePrefab: {fileID: 100100000, guid: c2207ca6faa3ff14d9cb48086644be15, type: 3}
+--- !u!95 &6202533908755101535
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4521305523098310447}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 485e82ff29abcd04c9d42197a8c029d9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

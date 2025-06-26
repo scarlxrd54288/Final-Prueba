@@ -13,7 +13,32 @@ MonoBehaviour:
   m_Name: NPCDatabase
   m_EditorClassIdentifier: 
   npcList:
-  - Name: 
+  - Name: a
+    ID: 0
+    Prefab: {fileID: 5266186307249953316, guid: 069b82d06f3bdec4e84bf331d7e11349,
+      type: 3}
+    Lifetime: 2.11
+  - Name: a
+    ID: 1
+    Prefab: {fileID: 4704336688624425511, guid: bbc3b82eb6bbf6f488e48292c4328a6a,
+      type: 3}
+    Lifetime: 2.11
+  - Name: a
+    ID: 2
+    Prefab: {fileID: 6973345463410931026, guid: 4755ccf7186722844a00e9c657cf3c9a,
+      type: 3}
+    Lifetime: 2.11
+  - Name: a
+    ID: 3
+    Prefab: {fileID: 4704336688624425511, guid: bbc3b82eb6bbf6f488e48292c4328a6a,
+      type: 3}
+    Lifetime: 2.11
+  - Name: a
+    ID: 4
+    Prefab: {fileID: 854817310025913589, guid: 05e2d6ab84f23ca4081799958f39df3c, type: 3}
+    Lifetime: 2.11
+  - Name: a
     ID: 5
-    Prefab: {fileID: 0}
-    Lifetime: 0
+    Prefab: {fileID: 2887777745731642743, guid: 637d9b14f86bb414e873e1600637a10e,
+      type: 3}
+    Lifetime: 2.11

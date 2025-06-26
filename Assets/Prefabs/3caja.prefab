@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 3149614502777423822}
   - component: {fileID: 679975007444476798}
   - component: {fileID: 6429070792799635853}
+  - component: {fileID: -6940855862383811390}
   m_Layer: 0
   m_Name: 3caja
   m_TagString: Obstacle
@@ -266,3 +267,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0067668, y: 0.99999994, z: 1.0033832}
   m_Center: {x: 0.5007379, y: 0.4973546, z: 0.4990462}
+--- !u!95 &-6940855862383811390
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7633244110563292547}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c691f0e5feffe964b8837c34b341baf9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

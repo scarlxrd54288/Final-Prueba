@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 619024074415594239}
   - component: {fileID: 9071743169184519035}
   - component: {fileID: 1535489031874557015}
+  - component: {fileID: -8571350515030155167}
   m_Layer: 0
   m_Name: 5tronco
   m_TagString: Obstacle
@@ -182,3 +183,24 @@ MonoBehaviour:
   evolutionLevel: 0
   damage: 0
   durability: 5
+--- !u!95 &-8571350515030155167
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7193580031783461337}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e821740d5ef55dd40b6e4a9e69e095dc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

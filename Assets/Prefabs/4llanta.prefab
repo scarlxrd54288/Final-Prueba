@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 4126229566823067863}
   - component: {fileID: 4809029511188958313}
   - component: {fileID: 6041255343656545887}
+  - component: {fileID: -5818629125408516286}
   m_Layer: 0
   m_Name: 4llanta
   m_TagString: Obstacle
@@ -182,3 +183,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0035142, y: 0.9998709, z: 0.99297166}
   m_Center: {x: 0.50077075, y: 0.49894917, z: 0.49901366}
+--- !u!95 &-5818629125408516286
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7988791747589783819}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d93f1a534f6dbb54eb56e7deb7c9102e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
