@@ -63,6 +63,17 @@ public class Obstacle : MonoBehaviour
 
     private void DestroyObstacle()
     {
+        // 1. Borra su celda en la grilla
+        /*
+        GridData globalGrid = PlacementSystem.Instance.GlobalGridData;
+        foreach (var pos in globalGrid.CalculatePositions(
+                     grid.WorldToCell(transform.position), Vector2Int.one))
+        {
+            globalGrid.RemoveObjectAt(pos);
+        }
+        */
+
+        //Original desde aqui----
         OnObstacleDestroyed?.Invoke(this);
         ObjectPoolManager.Instance.ReturnObject(gameObject, poolID);
     }

@@ -27,9 +27,14 @@ public class CarController : MonoBehaviour
 
     [SerializeField] private LayerMask detectionMask;
 
+    private Animator animator;
+    private bool isPushingObstacle = false;
+
+
     private void Awake()
     {
         currentHealth = maxHealth;
+        animator = GetComponent<Animator>();
     }
 
     public void Initialize(Vector3 direction, float speed, float damagePerSecond, int typeIndex, CarPoolManager poolManager, GridData carTrafficData, Grid grid)
@@ -66,6 +71,9 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
+        Debug.DrawRay(transform.position, direction * 0.6f, Color.red);
+        Debug.Log($"isStopped: {isStopped}, isPushingObstacle: {isPushingObstacle}");
+
         if (!isInitialized) return;
 
         if (spawnTimer > 0f)
@@ -78,30 +86,40 @@ public class CarController : MonoBehaviour
             TryResumeMovement();
         }
 
+        // NO pongas shouldPush aquí todavía
+        bool shouldPush = false;
+
         if (!isStopped)
         {
-            Move();
+            Move(); // <-- Aquí es donde puede cambiar isStopped
 
+            // Vuelve a evaluar raycast ofensivo por seguridad
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.6f, detectionMask))
             {
                 Obstacle obs = hit.collider.GetComponent<Obstacle>();
                 if (obs != null && obs.IsOffensive())
                 {
-                    obs.ApplyDamageToCar(this); // Solo recibe daño, no ataca
-                    return;
+                    obs.ApplyDamageToCar(this);
+                    shouldPush = true;
                 }
             }
         }
-        else
+
+        // Si está detenido, puede atacar
+        if (isStopped)
         {
+            shouldPush = true;
+
             if (currentObstacle != null && !currentObstacle.IsOffensive())
             {
                 Attack();
             }
         }
 
+        SetPushingAnimation(shouldPush);
         CheckOutOfBounds();
     }
+
 
     void Move()
     {
@@ -112,8 +130,11 @@ public class CarController : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.7f, detectionMask))
             {
+                Debug.Log($"Raycast hit: {hit.collider.name}, Tag: {hit.collider.tag}");
+
                 if (hit.collider.CompareTag("Obstacle"))
                 {
+                    Debug.Log("Detenido por obstáculo");
                     currentObstacle = hit.collider.GetComponent<Obstacle>();
                     isStopped = true;
 
@@ -181,11 +202,13 @@ public class CarController : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            SetPushingAnimation(false);
             carTrafficData.RemoveObjectAt(currentCell);
             poolManager.ReturnCarToPool(gameObject, typeIndex);
             OnCarRemoved?.Invoke();
         }
     }
+
 
     void CheckOutOfBounds()
     {
@@ -216,6 +239,24 @@ public class CarController : MonoBehaviour
     }
 
     public bool IsStopped() => isStopped;
+
+    public void SetPushingAnimation(bool isPushing)
+    {
+        if (animator == null)
+        {
+            Debug.LogWarning("Animator es null!");
+            return;
+        }
+
+        if (isPushingObstacle == isPushing) return;
+
+        Debug.Log($"SetPushingAnimation: {isPushing}");//Nunca sale esto en la consola
+        isPushingObstacle = isPushing;
+        animator.SetBool("isPushing", isPushing);
+    }
+
+
+
 }
 
 

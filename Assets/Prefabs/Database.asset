@@ -18,7 +18,7 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 5624386004167090412, guid: 5f4e6bbb86f94fa41bc67380d76d3df5,
       type: 3}
-    <BaseResistance>k__BackingField: 2
+    <BaseResistance>k__BackingField: 1
     ResistancePerLevel: 
     <EvolvedResistance>k__BackingField: 2
     <EvolvedDamage>k__BackingField: 2
@@ -28,7 +28,7 @@ MonoBehaviour:
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 2
-    Evolved: 1
+    Evolved: 0
     EvolutionPoints: 20
     EvolvedPrefab: {fileID: 1793361976346682452, guid: 4f479fd949962d54eaf0477864415b38,
       type: 3}
@@ -48,7 +48,7 @@ MonoBehaviour:
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 3
-    Evolved: 1
+    Evolved: 0
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 2105846800858134641, guid: 20284a14f50017f4f801365b9020ccf8,
       type: 3}
@@ -68,7 +68,7 @@ MonoBehaviour:
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 4
-    Evolved: 1
+    Evolved: 0
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 4013554065206849377, guid: 7b99e8e4dcf6dbc45a32b1808a4eeac0,
       type: 3}
@@ -83,12 +83,12 @@ MonoBehaviour:
     <EvolvedResistance>k__BackingField: 6
     <EvolvedDamage>k__BackingField: 6
     <UnlockCost>k__BackingField: 8
-    <Unlocked>k__BackingField: 1
+    <Unlocked>k__BackingField: 0
     <CooldownTime>k__BackingField: 10
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 6
-    Evolved: 1
+    Evolved: 0
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 5464618082020869139, guid: 2d86d393626d7ff448204db26491b4a3,
       type: 3}
@@ -103,12 +103,12 @@ MonoBehaviour:
     <EvolvedResistance>k__BackingField: 8
     <EvolvedDamage>k__BackingField: 8
     <UnlockCost>k__BackingField: 8
-    <Unlocked>k__BackingField: 1
+    <Unlocked>k__BackingField: 0
     <CooldownTime>k__BackingField: 10
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 8
-    Evolved: 1
+    Evolved: 0
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 1445564011991035719, guid: 96e968aca0e973943b2b830af69c51b4,
       type: 3}
@@ -123,12 +123,12 @@ MonoBehaviour:
     <EvolvedResistance>k__BackingField: 10
     <EvolvedDamage>k__BackingField: 10
     <UnlockCost>k__BackingField: 8
-    <Unlocked>k__BackingField: 1
+    <Unlocked>k__BackingField: 0
     <CooldownTime>k__BackingField: 10
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 10
-    Evolved: 1
+    Evolved: 0
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 9109702262816392518, guid: 7a925d8c79ae62a45996f95fa1aedc2c,
       type: 3}
