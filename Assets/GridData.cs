@@ -11,7 +11,7 @@ public class GridData
     {
         if (!CanPlaceObjectAt(gridPosition, size, type))
         {
-            Debug.LogWarning("Celda " + gridPosition + " ya está ocupada, no se puede colocar ahí.");
+            Debug.LogWarning("Celda " + gridPosition + " ya está ocupada o fuera de límites.");
             return;
         }
 
@@ -23,6 +23,7 @@ public class GridData
             placedObjects[pos] = data;
         }
     }
+
 
     public void RemoveObjectAt(Vector3Int cellPosition)
     {
@@ -44,6 +45,8 @@ public class GridData
         List<Vector3Int> positionsToOccupy = CalculatePositions(gridPosition, objectSize);
         foreach (var pos in positionsToOccupy)
         {
+            if (!IsInsideBounds(pos)) return false;
+
             if (placedObjects.TryGetValue(pos, out var existingData))
             {
                 //Quitar---------
@@ -75,6 +78,16 @@ public class GridData
         }
         return result;
     }
+
+    public Vector2Int gridMin = new Vector2Int(-11, -2);
+    public Vector2Int gridMax = new Vector2Int(11, 2); // Modificá según tu nivel real
+
+    public bool IsInsideBounds(Vector3Int pos)
+    {
+        return pos.x >= gridMin.x && pos.x < gridMax.x &&
+               pos.z >= gridMin.y && pos.z < gridMax.y;
+    }
+
 }
 
 
