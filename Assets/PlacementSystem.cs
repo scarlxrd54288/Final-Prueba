@@ -115,12 +115,29 @@ public class PlacementSystem : MonoBehaviour
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
-       
-        if (!globalGridData.CanPlaceObjectAt(gridPosition, objData.Size, type))
+
+
+        // Verificamos si hay un auto físicamente en la celda
+        Vector3 worldPos = grid.CellToWorld(gridPosition) + new Vector3(0.5f, 0.5f, 0.5f); // centro de celda
+        Vector3 boxSize = new Vector3(objData.Size.x, 1f, objData.Size.y);
+
+        bool isCarInCell = Physics.CheckBox(worldPos, boxSize * 0.5f, Quaternion.identity, LayerMask.GetMask("Car"));
+
+        if (!globalGridData.CanPlaceObjectAt(gridPosition, objData.Size, type) || isCarInCell)
         {
-            AudioManager.Instance.PlayPlaceErrorSound(); 
+            AudioManager.Instance.PlayPlaceErrorSound();
             return;
         }
+
+
+        /*
+        if (!globalGridData.CanPlaceObjectAt(gridPosition, objData.Size, type) ||
+            globalGridData.HasObjectAt(gridPosition)) // ¿Quizás querías esto?
+        {
+            AudioManager.Instance.PlayPlaceErrorSound();
+            return;
+        }
+        */
 
 
         AudioManager.Instance.PlayPlaceObjectSound();

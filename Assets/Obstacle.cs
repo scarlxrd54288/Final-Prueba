@@ -111,9 +111,9 @@ public class Obstacle : MonoBehaviour
 
     public bool IsOffensive()
     {
-        //return Evolved;
-        return damage > 0f;
+        return gameObject.CompareTag("eObstacle") || damage > 0f;
     }
+
 
 
 }

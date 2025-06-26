@@ -158,6 +158,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStopped: 0
   maxHealth: 1
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!65 &214828198954383479
 BoxCollider:
   m_ObjectHideFlags: 0
