@@ -181,3 +181,4 @@ MonoBehaviour:
   maxResistance: 5
   evolutionLevel: 0
   damage: 0
+  durability: 5

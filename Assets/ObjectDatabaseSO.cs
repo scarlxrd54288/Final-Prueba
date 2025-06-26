@@ -33,7 +33,7 @@ public class ObjectData
     [field: SerializeField] public bool IsOffensive { get; private set; }
     [field: SerializeField] public int Durability { get; private set; }
 
-    public bool Evolved = false;
+    [SerializeField] public bool Evolved = false;
     public int EvolutionPoints;
     public GameObject EvolvedPrefab;
     public int EvolutionLevel;

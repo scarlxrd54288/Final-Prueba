@@ -24,7 +24,16 @@ public class PointManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+
+        // Resetear todos los objetos al iniciar
+        foreach (var obj in objectDatabase.objectsData)
+        {
+            obj.Unlocked = false;
+            obj.Evolved = false;
+            obj.CooldownTimer = 0f;
+        }
     }
+
 
     private void Update()
     {

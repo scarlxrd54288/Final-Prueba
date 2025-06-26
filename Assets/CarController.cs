@@ -46,6 +46,8 @@ public class CarController : MonoBehaviour
         this.carTrafficData = carTrafficData;
         this.grid = grid;
 
+        currentHealth = maxHealth;
+
         isStopped = false;
         currentObstacle = null;
         spawnTimer = spawnGraceTime;
@@ -62,7 +64,7 @@ public class CarController : MonoBehaviour
         }
 
         isInitialized = true;
-        Debug.Log($" Auto inicializado en celda {currentCell} con dirección {direction} y velocidad {speed}");
+        //Debug.Log($" Auto inicializado en celda {currentCell} con dirección {direction} y velocidad {speed}");
     }
 
     void Update()
@@ -119,7 +121,7 @@ public class CarController : MonoBehaviour
         
         if (spawnTimer <= 0f)
         {
-            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.8f))
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.2f))
             {
                 Obstacle obs = hit.collider.GetComponent<Obstacle>();
                 if (obs != null)
@@ -258,6 +260,8 @@ public class CarController : MonoBehaviour
     public void ReceiveDamage(float amount)
     {
         currentHealth -= amount;
+        Debug.Log($"{gameObject.name} recibió daño. Vida restante: {currentHealth}");
+
         if (currentHealth <= 0)
         {
             Debug.Log($"{gameObject.name} destruido por daño");
@@ -266,5 +270,7 @@ public class CarController : MonoBehaviour
             OnCarRemoved?.Invoke();
         }
     }
+    //maybe a initialize
+    
 
 }

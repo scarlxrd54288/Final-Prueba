@@ -19,7 +19,7 @@ public class Obstacle : MonoBehaviour
 
     [SerializeField] private float damage = 0f;
     public float Damage => damage;
-    [SerializeField] private int durability = -1; // -1 = infinito
+    [SerializeField] private int durability = 0; // -1 = infinito
     private int damageCount = 0;
 
     private int hitCount = 0;
@@ -70,6 +70,8 @@ public class Obstacle : MonoBehaviour
         damage = newDamage;
         durability = newDurability;
         hitCount = 0;
+        Debug.Log($"{gameObject.name} evolucionado. Damage = {damage}, Durability = {durability}");
+
     }
 
 
@@ -85,20 +87,26 @@ public class Obstacle : MonoBehaviour
     public void ApplyDamageToCar(CarController car)
     {
         if (damage <= 0f) return;
-
-        if (car == null) return; // seguridad adicional
+        if (car == null) return;
 
         car.ReceiveDamage(damage * Time.deltaTime);
 
         if (durability > 0)
         {
             damageCount++;
+            Debug.Log($"{gameObject.name} ha dañado un auto. Golpes recibidos: {damageCount}/{durability}");
+
             if (damageCount >= durability)
             {
                 DestroyObstacle();
             }
         }
+        else
+        {
+            Debug.Log($"{gameObject.name} tiene durabilidad infinita.");
+        }
     }
+
 
 
     public bool IsOffensive()

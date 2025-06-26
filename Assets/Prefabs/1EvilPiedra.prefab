@@ -51,7 +51,7 @@ MonoBehaviour:
   maxResistance: 1
   evolutionLevel: 0
   damage: 0
-  durability: -1
+  durability: 1
 --- !u!54 &4263823531577170385
 Rigidbody:
   m_ObjectHideFlags: 0

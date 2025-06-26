@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5287545881457211130}
+  - component: {fileID: 2257332523211374413}
+  - component: {fileID: 8056274976068583379}
+  - component: {fileID: 302275557173605991}
   m_Layer: 0
   m_Name: 4EvilLlanta
   m_TagString: eObstacle
@@ -33,6 +36,70 @@ Transform:
   - {fileID: 5949966699069411663}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2257332523211374413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8243235272967504713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be67e7f953d7ca41bf6ce1a0e9eead4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxResistance: 4
+  evolutionLevel: 0
+  damage: 0
+  durability: 4
+--- !u!54 &8056274976068583379
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8243235272967504713}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &302275557173605991
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8243235272967504713}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000005, y: 1, z: 1.0073023}
+  m_Center: {x: 0.49659753, y: 0, z: 0.5002489}
 --- !u!1001 &949173680551676325
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41,6 +108,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5287545881457211130}
     m_Modifications:
+    - target: {fileID: 4126229566823067863, guid: dc408e8dc2c498040ac32207fb5d186b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126229566823067863, guid: dc408e8dc2c498040ac32207fb5d186b,
+        type: 3}
+      propertyPath: durability
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6899131306387527914, guid: dc408e8dc2c498040ac32207fb5d186b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -101,7 +178,9 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6041255343656545887, guid: dc408e8dc2c498040ac32207fb5d186b, type: 3}
+    - {fileID: 4809029511188958313, guid: dc408e8dc2c498040ac32207fb5d186b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

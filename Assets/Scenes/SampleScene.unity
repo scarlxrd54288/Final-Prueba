@@ -5319,14 +5319,14 @@ MonoBehaviour:
     activeCars: []
   - spawnPoint: {fileID: 2109427118}
     direction: {x: -1, y: 0, z: 0}
-    speed: 2
+    speed: 1
     active: 1
     baseSpawnInterval: 2
     currentTimer: 0
     activeCars: []
   - spawnPoint: {fileID: 662924334}
     direction: {x: -1, y: 0, z: 0}
-    speed: 3
+    speed: 2
     active: 1
     baseSpawnInterval: 3
     currentTimer: 0

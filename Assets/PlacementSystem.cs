@@ -142,7 +142,7 @@ public class PlacementSystem : MonoBehaviour
             obstacle.SetPoolID(objData.ID);
             float resistance = objData.Evolved ? objData.EvolvedResistance : objData.BaseResistance;
             float damage = objData.Evolved ? objData.EvolvedDamage : 0f;
-            obstacle.Evolve(objData.Evolved ? 1 : 0, resistance, damage);
+            obstacle.Evolve(objData.Evolved ? 1 : 0, resistance, damage, objData.Durability);
         }
 
         placedGameObject.Add(newObject);
