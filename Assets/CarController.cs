@@ -52,7 +52,9 @@ public class CarController : MonoBehaviour
 
         if (!carTrafficData.HasObjectAt(currentCell))
         {
-            carTrafficData.AddObjectAt(currentCell, Vector2Int.one, -1, -1, GridObjectType.Car);
+            CarDataSO carData = poolManager.GetCarData(typeIndex);
+            carTrafficData.AddObjectAt(currentCell, carData.size, -1, typeIndex, GridObjectType.Car);
+
         }
         else
         {
@@ -137,9 +139,11 @@ public class CarController : MonoBehaviour
         if (nextCell != currentCell)
         {
             transform.position = targetPosition;
+            CarDataSO carData = poolManager.GetCarData(typeIndex);
             carTrafficData.RemoveObjectAt(currentCell);
-            carTrafficData.AddObjectAt(nextCell, Vector2Int.one, -1, -1, GridObjectType.Car);
+            carTrafficData.AddObjectAt(nextCell, carData.size, -1, typeIndex, GridObjectType.Car);
             currentCell = nextCell;
+
         }
         else
         {
