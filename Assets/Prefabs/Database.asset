@@ -28,8 +28,8 @@ MonoBehaviour:
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 2
-    Evolved: 1
-    EvolutionPoints: 50
+    Evolved: 0
+    EvolutionPoints: 20
     EvolvedPrefab: {fileID: 7668823987891448717, guid: 7fd9566f70481da42bdd8c198bdcf3b5,
       type: 3}
     EvolutionLevel: 0
@@ -45,10 +45,10 @@ MonoBehaviour:
     <UnlockCost>k__BackingField: 3
     <Unlocked>k__BackingField: 1
     <CooldownTime>k__BackingField: 5
-    CooldownTimer: 0
+    CooldownTimer: 0.3391147
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 3
-    Evolved: 1
+    Evolved: 0
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 3560548354747551731, guid: a5e9236ca1dd9614a980949a10b252b5,
       type: 3}
@@ -68,7 +68,7 @@ MonoBehaviour:
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 4
-    Evolved: 1
+    Evolved: 0
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 93218428106817745, guid: bda3e0419b6d1dc4189985bf17b27180,
       type: 3}
@@ -88,7 +88,7 @@ MonoBehaviour:
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 6
-    Evolved: 1
+    Evolved: 0
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 8243235272967504713, guid: 0caed758852999846b883d0542cb7922,
       type: 3}
@@ -108,7 +108,7 @@ MonoBehaviour:
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 8
-    Evolved: 1
+    Evolved: 0
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 5046852378026133806, guid: c994984c0d7ca914a87cbe35effab3a8,
       type: 3}
@@ -128,7 +128,7 @@ MonoBehaviour:
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
     <Durability>k__BackingField: 10
-    Evolved: 1
+    Evolved: 0
     EvolutionPoints: 100
     EvolvedPrefab: {fileID: 4078420274951205110, guid: 316c1a6c16a44b544811a6aad7912458,
       type: 3}
