@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 6482745913445700957}
   - component: {fileID: 7323298013319538265}
   - component: {fileID: 9191923796918126188}
+  - component: {fileID: -5845074247662168931}
   m_Layer: 0
   m_Name: 1piedras
   m_TagString: Obstacle
@@ -520,6 +521,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.99684405, y: 1, z: 1.0021745}
   m_Center: {x: 0.5023817, y: 0, z: 0.49893624}
+--- !u!95 &-5845074247662168931
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5624386004167090412}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8b146554895171c45b57c8e2094dee4a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6086753836805940854
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,6 +37,8 @@ public class PlacementSystem : MonoBehaviour
     //Indicador de celda
     [SerializeField]
     private GameObject cellIndicator;
+    //Npcs
+    [SerializeField] private NPCDatabaseSO npcDatabase;
 
     private void Awake()
     {
@@ -129,8 +131,29 @@ public class PlacementSystem : MonoBehaviour
             : objData.Prefab;
 
         GameObject newObject = ObjectPoolManager.Instance.GetObject(prefabToUse, objData.ID);
-
+        //Spawn
         newObject.transform.position = grid.CellToWorld(gridPosition);
+        //Animación
+        Animator objAnimator = newObject.GetComponent<Animator>();
+        if (objAnimator != null)
+        {
+            objAnimator.SetTrigger("Entry");
+        }
+        // Animacion y spawn npc
+
+        // Spawn NPC desde el NPCPoolManager
+        NPCData npcData = npcDatabase.npcList.Find(n => n.ID == objData.ID);
+        if (npcData != null)
+        {
+            GameObject npcObject = NPCPoolManager.Instance.GetNPC(npcData.ID);
+            npcObject.transform.position = grid.CellToWorld(gridPosition);
+
+            NPC npc = npcObject.GetComponent<NPC>();
+            if (npc != null)
+                npc.PlayEntry(npcData.Lifetime);
+        }
+
+
 
         //Inicia cooldown---------------------------
         objData.CooldownTimer = objData.CooldownTime;
