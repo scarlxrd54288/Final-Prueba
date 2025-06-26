@@ -70,7 +70,7 @@ public class TrafficManager : MonoBehaviour
         {
             Vector3 offset = lane.direction.normalized * Random.Range(0f, 0.8f);
             Vector3 spawnPos = lane.spawnPoint.position + offset;
-            spawnPos.y = 0.112f;
+            spawnPos.y = 0f;
 
             car.transform.position = spawnPos;
 

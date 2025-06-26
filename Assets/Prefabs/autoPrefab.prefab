@@ -16,7 +16,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.136
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: -6525669333119652660, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.052195355
+      value: 0.15580463
       objectReference: {fileID: 0}
     - target: {fileID: -6525669333119652660, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
@@ -71,7 +71,7 @@ PrefabInstance:
     - target: {fileID: -5347440894301880987, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.052195355
+      value: 0.15580463
       objectReference: {fileID: 0}
     - target: {fileID: -5347440894301880987, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
@@ -81,7 +81,7 @@ PrefabInstance:
     - target: {fileID: -2173941467654857855, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.052195355
+      value: 0.15580463
       objectReference: {fileID: 0}
     - target: {fileID: -2173941467654857855, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
@@ -91,7 +91,7 @@ PrefabInstance:
     - target: {fileID: -829616133081225912, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.223
+      value: 0.431
       objectReference: {fileID: 0}
     - target: {fileID: -829616133081225912, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 6765467666606767359, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.052195355
+      value: 0.15580463
       objectReference: {fileID: 0}
     - target: {fileID: 6765467666606767359, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
@@ -215,8 +215,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8024781, y: 0.6924737, z: 2.0066278}
-  m_Center: {x: -0.006046593, y: 0.13513643, z: 0.0012415648}
+  m_Size: {x: 0.8024781, y: 1.0002921, z: 2.0066278}
+  m_Center: {x: -0.006046593, y: 0.49862385, z: 0.0012415648}
 --- !u!54 &6364306568469658986
 Rigidbody:
   m_ObjectHideFlags: 0
