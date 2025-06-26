@@ -13,6 +13,9 @@ public class CarPoolManager : MonoBehaviour
 {
     [SerializeField] private List<CarTypePool> carTypes;
 
+    [Header("Color Settings")]
+    [SerializeField] private Color[] possibleColors; // Define aquí tus colores
+
     private List<Queue<GameObject>> carPools = new();
 
     void Awake()
@@ -39,10 +42,25 @@ public class CarPoolManager : MonoBehaviour
         {
             var car = queue.Dequeue();
             car.SetActive(true);
+
+            AssignRandomColor(car);
+
             return car;
         }
 
         return null;
+    }
+
+    private void AssignRandomColor(GameObject car)
+    {
+        Renderer renderer = car.GetComponentInChildren<Renderer>();
+        if (renderer != null && possibleColors.Length > 0)
+        {
+            Color randomColor = possibleColors[Random.Range(0, possibleColors.Length)];
+            // Instancia material único para este renderer para no afectar a todos
+            renderer.material = new Material(renderer.material);
+            renderer.material.color = randomColor;
+        }
     }
 
     public void ReturnCarToPool(GameObject car, int typeIndex)
@@ -61,3 +79,4 @@ public class CarPoolManager : MonoBehaviour
         return carTypes[index].carData;
     }
 }
+
