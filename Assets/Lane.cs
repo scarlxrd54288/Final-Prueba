@@ -11,10 +11,10 @@ public class Lane
     public bool active = true;
 
     [Header("Frecuencia de Spawn")]
-    public float baseSpawnInterval = 2f;
+    public float baseSpawnInterval = 1.8f;
 
     [Tooltip("Multiplicador dinámico ajustado por el TrafficManager")]
-    public float spawnMultiplier = 1f; // Nuevo campo para modificar la frecuencia externamente
+    public float spawnMultiplier = 1f; // Frecuencia global----------
 
     [HideInInspector] public float currentTimer = 0f;
 
