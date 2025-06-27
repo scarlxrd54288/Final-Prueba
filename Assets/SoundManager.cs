@@ -6,7 +6,6 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     [Header("Audio Sources")]
-    [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource ambientSource;
 
@@ -41,6 +40,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -55,26 +55,46 @@ public class AudioManager : MonoBehaviour
     // === Sound FX Methods ===
     public void PlayPlaceObjectSound() => PlaySFX(placeObjectClip);
     public void PlayPlaceErrorSound() => PlaySFX(placeErrorClip);
-    //public void PlayCrashSound() => PlaySFX(carCrashClip);
     public void PlayButtonClickSound() => PlaySFX(buttonClickClip);
+
+    private bool canPlayCrash = true;
+    public float crashCooldown = 0.5f; // medio segundo de cooldown
 
     public void PlayCrashSound()
     {
-        if (carCrashClip == null) return;
+        if (carCrashClip == null || !canPlayCrash) return;
 
         float randomPitch = UnityEngine.Random.Range(pitchMin, pitchMax);
         float randomVolume = UnityEngine.Random.Range(crashVolumeMin, crashVolumeMax);
-        sfxSource.pitch = randomPitch;
-        sfxSource.PlayOneShot(carCrashClip, randomVolume * sfxVolume);
+        PlaySFX(carCrashClip, randomVolume, randomPitch);
+
+        canPlayCrash = false;
+        Invoke(nameof(ResetCrashCooldown), crashCooldown);
     }
 
+    private void ResetCrashCooldown()
+    {
+        canPlayCrash = true;
+    }
+
+    // Nuevo método que crea un AudioSource temporal para pitch independiente
     private void PlaySFX(AudioClip clip)
+    {
+        PlaySFX(clip, sfxVolume, UnityEngine.Random.Range(pitchMin, pitchMax));
+    }
+
+    private void PlaySFX(AudioClip clip, float volume, float pitch)
     {
         if (clip == null) return;
 
-        float randomPitch = UnityEngine.Random.Range(pitchMin, pitchMax);
-        sfxSource.pitch = randomPitch;
-        sfxSource.PlayOneShot(clip);
+        GameObject tempGO = new GameObject("TempAudio");
+        AudioSource aSource = tempGO.AddComponent<AudioSource>();
+        aSource.clip = clip;
+        aSource.volume = volume;
+        aSource.pitch = pitch;
+        aSource.Play();
+
+        Destroy(tempGO, clip.length / pitch);
     }
 
     // === Music & Ambient ===
@@ -108,7 +128,6 @@ public class AudioManager : MonoBehaviour
     public void SetSFXVolume(float value)
     {
         sfxVolume = value;
-        sfxSource.volume = sfxVolume;
     }
 
     public void SetAmbientVolume(float value)
@@ -128,4 +147,5 @@ public class AudioManager : MonoBehaviour
         pitchMax = value;
     }
 }
+
 

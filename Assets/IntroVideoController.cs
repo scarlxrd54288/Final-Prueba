@@ -4,29 +4,50 @@ using UnityEngine.SceneManagement;
 
 public class IntroVideoController : MonoBehaviour
 {
-    public VideoPlayer videoPlayer;       // Asigna desde el Inspector
-    public GameObject menuCanvas;         // El Canvas del menú que aparece después
+    public VideoPlayer videoPlayer;
+    public GameObject menuCanvas;
 
     private bool menuShown = false;
+    private Animator menuAnimator;
 
     void Start()
     {
-        videoPlayer.loopPointReached += OnVideoEnd; // Se ejecuta al terminar el video
-        menuCanvas.SetActive(false); // Asegúrate de que esté desactivado al inicio
+        videoPlayer.loopPointReached += OnVideoEnd;
+
+        if (menuCanvas != null)
+        {
+            menuCanvas.SetActive(false);
+            menuAnimator = menuCanvas.GetComponent<Animator>();
+        }
+        else
+        {
+            Debug.LogError("No se ha asignado el menuCanvas en el inspector.");
+        }
     }
 
     void OnVideoEnd(VideoPlayer vp)
     {
-        if (!menuShown)
+        if (!menuShown && menuCanvas != null)
         {
             Debug.Log("Video terminado. Activando menú.");
             menuCanvas.SetActive(true);
-            menuShown = true; // Para que no se repita si el video se reinicia
+
+            if (menuAnimator != null)
+            {
+                menuAnimator.SetTrigger("Inicio");
+            }
+            else
+            {
+                Debug.LogWarning("No se encontró Animator en menuCanvas.");
+            }
+
+            menuShown = true;
         }
     }
 
     public void GoToGame()
     {
-        SceneManager.LoadScene("GameScene"); // Reemplaza con el nombre correcto
+        SceneManager.LoadScene("GameScene");
     }
 }
+

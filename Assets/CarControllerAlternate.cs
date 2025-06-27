@@ -9,7 +9,7 @@ public class CarControllerAlternate : MonoBehaviour
     private GridData carTrafficData;
     private Grid grid;
     private Vector3Int currentCell;
-
+    
     private Vector3 direction;
     private float speed;
     private float damage;
@@ -110,7 +110,7 @@ public class CarControllerAlternate : MonoBehaviour
         CheckOutOfBounds();
     }
 
-
+    private bool hasPlayedCrashSound = false;
     void Move()
     {
         if (grid == null || carTrafficData == null) return;
@@ -129,7 +129,11 @@ public class CarControllerAlternate : MonoBehaviour
                 {
                     currentObstacle = obs;
                     isStopped = true;
-                    AudioManager.Instance.PlayCrashSound();
+                    if (!hasPlayedCrashSound) // Solo si no se ha reproducido aún
+                    {
+                        AudioManager.Instance.PlayCrashSound();
+                        hasPlayedCrashSound = true; // Marcar que ya sonó
+                    }
                     return;
                 }
                 
@@ -138,7 +142,11 @@ public class CarControllerAlternate : MonoBehaviour
                 {
                     isStopped = true;
                     currentObstacle = null;
-                    AudioManager.Instance.PlayCrashSound();
+                    if (!hasPlayedCrashSound) // Solo si no se ha reproducido aún
+                    {
+                        AudioManager.Instance.PlayCrashSound();
+                        hasPlayedCrashSound = true; // Marcar que ya sonó
+                    }
                     return;
                 }
             }
@@ -158,9 +166,11 @@ public class CarControllerAlternate : MonoBehaviour
             carTrafficData.RemoveObjectAt(currentCell);
             carTrafficData.AddObjectAt(nextCell, Vector2Int.one, -1, -1, GridObjectType.Car);
             currentCell = nextCell;
+            // Un solo sonido de choque por movimiento
+            hasPlayedCrashSound = false;
         }
-        
-        else
+
+                else
         {
             transform.position = targetPosition;
         }

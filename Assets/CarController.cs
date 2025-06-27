@@ -30,6 +30,9 @@ public class CarController : MonoBehaviour
     private Animator animator;
     private bool isPushingObstacle = false;
 
+    private bool playedCrashThisStop = false;
+    private bool wasStoppedLastFrame = false;
+
 
     private void Awake()
     {
@@ -105,10 +108,16 @@ public class CarController : MonoBehaviour
             }
         }
 
+        // Si el auto acaba de detenerse este frame, sonar crash una vez
+        if (isStopped && !playedCrashThisStop)
+        {
+            AudioManager.Instance.PlayCrashSound();
+            playedCrashThisStop = true;
+        }
+
         // Si está detenido, puede atacar
         if (isStopped)
         {
-            // Solo activa animación si hay obstáculo válido ofensivo o no-ofensivo
             if (currentObstacle != null)
             {
                 shouldPush = true;
@@ -125,10 +134,10 @@ public class CarController : MonoBehaviour
             }
         }
 
-
         SetPushingAnimation(shouldPush);
         CheckOutOfBounds();
     }
+
 
 
     void Move()
@@ -142,10 +151,8 @@ public class CarController : MonoBehaviour
             {
                 Debug.Log($"Raycast hit: {hit.collider.name}, Tag: {hit.collider.tag}");
 
-                //if (hit.collider.CompareTag("Obstacle"))
                 if (hit.collider.CompareTag("Obstacle") || hit.collider.CompareTag("eObstacle"))
                 {
-                    Debug.Log("Detenido por obstáculo");
                     currentObstacle = hit.collider.GetComponent<Obstacle>();
                     isStopped = true;
 
@@ -154,7 +161,6 @@ public class CarController : MonoBehaviour
                         currentObstacle.ApplyDamageToCar(this);
                     }
 
-                    AudioManager.Instance.PlayCrashSound();
                     return;
                 }
 
@@ -162,7 +168,6 @@ public class CarController : MonoBehaviour
                 {
                     isStopped = true;
                     currentObstacle = null;
-                    AudioManager.Instance.PlayCrashSound();
                     return;
                 }
             }
@@ -175,13 +180,13 @@ public class CarController : MonoBehaviour
             carTrafficData.RemoveObjectAt(currentCell);
             carTrafficData.AddObjectAt(nextCell, carData.size, -1, typeIndex, GridObjectType.Car);
             currentCell = nextCell;
-
         }
         else
         {
             transform.position = targetPosition;
         }
     }
+
 
     void Attack()
     {
@@ -204,8 +209,10 @@ public class CarController : MonoBehaviour
         {
             isStopped = false;
             currentObstacle = null;
+            playedCrashThisStop = false;
         }
     }
+
 
     public void ReceiveDamage(float amount)
     {
@@ -265,9 +272,7 @@ public class CarController : MonoBehaviour
         isPushingObstacle = isPushing;
         animator.SetBool("isPushing", isPushing);
     }
-
-
-
 }
+
 
 
