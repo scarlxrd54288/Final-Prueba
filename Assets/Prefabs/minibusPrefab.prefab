@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStopped: 0
-  maxHealth: 1
+  maxHealth: 60
   detectionMask:
     serializedVersion: 2
     m_Bits: 1

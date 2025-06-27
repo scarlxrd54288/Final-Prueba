@@ -18,18 +18,18 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 5624386004167090412, guid: 5f4e6bbb86f94fa41bc67380d76d3df5,
       type: 3}
-    <BaseResistance>k__BackingField: 1
+    <BaseResistance>k__BackingField: 20
     ResistancePerLevel: 
-    <EvolvedResistance>k__BackingField: 2
-    <EvolvedDamage>k__BackingField: 2
+    <EvolvedResistance>k__BackingField: 20
+    <EvolvedDamage>k__BackingField: 15
     <UnlockCost>k__BackingField: 0
-    <Unlocked>k__BackingField: 1
-    <CooldownTime>k__BackingField: 3
+    <Unlocked>k__BackingField: 0
+    <CooldownTime>k__BackingField: 10
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
-    <Durability>k__BackingField: 2
+    <Durability>k__BackingField: 40
     Evolved: 0
-    EvolutionPoints: 20
+    EvolutionPoints: 300
     EvolvedPrefab: {fileID: 1793361976346682452, guid: 4f479fd949962d54eaf0477864415b38,
       type: 3}
     EvolutionLevel: 0
@@ -38,18 +38,18 @@ MonoBehaviour:
     <Size>k__BackingField: {x: 1, y: 1}
     <Prefab>k__BackingField: {fileID: 7482719005667537386, guid: 77d96ec0f557faa4ca9f0c90110aaa4d,
       type: 3}
-    <BaseResistance>k__BackingField: 3
+    <BaseResistance>k__BackingField: 25
     ResistancePerLevel: 
-    <EvolvedResistance>k__BackingField: 3
-    <EvolvedDamage>k__BackingField: 3
-    <UnlockCost>k__BackingField: 3
-    <Unlocked>k__BackingField: 1
-    <CooldownTime>k__BackingField: 5
+    <EvolvedResistance>k__BackingField: 25
+    <EvolvedDamage>k__BackingField: 18
+    <UnlockCost>k__BackingField: 30
+    <Unlocked>k__BackingField: 0
+    <CooldownTime>k__BackingField: 11
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0
-    <Durability>k__BackingField: 3
+    <Durability>k__BackingField: 45
     Evolved: 0
-    EvolutionPoints: 100
+    EvolutionPoints: 300
     EvolvedPrefab: {fileID: 2105846800858134641, guid: 20284a14f50017f4f801365b9020ccf8,
       type: 3}
     EvolutionLevel: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
     <EvolvedResistance>k__BackingField: 4
     <EvolvedDamage>k__BackingField: 4
     <UnlockCost>k__BackingField: 5
-    <Unlocked>k__BackingField: 1
+    <Unlocked>k__BackingField: 0
     <CooldownTime>k__BackingField: 8
     CooldownTimer: 0
     <IsOffensive>k__BackingField: 0

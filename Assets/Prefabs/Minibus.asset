@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Minibus
   m_EditorClassIdentifier: 
   prefab: {fileID: 1043965485701756679, guid: 715679fc4d830fc47909c936eb9bb4ef, type: 3}
-  baseDamage: 2
-  speed: 1
+  baseDamage: 10
+  speed: 3.5
+  size: {x: 2, y: 1}

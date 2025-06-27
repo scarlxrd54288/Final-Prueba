@@ -101,35 +101,45 @@ public class PointManager : MonoBehaviour
     {
         GameState previousState = currentState;
 
-        if (currentPoints >= 100 || IsUnlocked(1))
+        // Wave1: a los 50 puntos
+        if (currentPoints >= 50 && currentState == GameState.Calm)
         {
-            if (currentState == GameState.Calm)
-            {
-                currentState = GameState.Wave1;
-            }
+            currentState = GameState.Wave1;
         }
 
-        if ((currentPoints >= 300 || IsUnlocked(3)) && currentState == GameState.BetweenWaves)
+        // BetweenWaves: a los 150 puntos (por ejemplo)
+        if (currentPoints >= 150 && currentState == GameState.Wave1)
+        {
+            currentState = GameState.BetweenWaves;
+        }
+
+        // Wave2: a los 300 puntos
+        if (currentPoints >= 300 && currentState == GameState.BetweenWaves)
         {
             currentState = GameState.Wave2;
         }
 
-        if (AllLanesBlockedForSeconds(10) || currentPoints >= 500)
+        // Victoria: si se bloquean todos los carriles por 10s o se alcanza 500 puntos
+        //if (AllLanesBlockedForSeconds(10) || currentPoints >= 500)
+        if (currentPoints >= 500) //aumentar que sea wave2 tambien?-------------
         {
             currentState = GameState.Victory;
         }
 
+        // Game Over por tiempo
         if (timer >= maxGameTime)
         {
             currentState = GameState.GameOver;
         }
 
+        // Notificar si hubo cambio de estado
         if (currentState != previousState)
         {
             OnGameStateChanged?.Invoke(currentState);
         }
     }
 
+    /*
     private bool AllLanesBlockedForSeconds(float seconds)
     {
         bool allBlocked = true;
@@ -152,7 +162,7 @@ public class PointManager : MonoBehaviour
             allLanesBlockedTime = 0;
         }
         return false;
-    }
+    }*/
 
     public bool IsUnlocked(int id)
     {

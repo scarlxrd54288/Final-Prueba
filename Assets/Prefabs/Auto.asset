@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Auto
   m_EditorClassIdentifier: 
   prefab: {fileID: 8649573377048506150, guid: ef9c0646fa064024589f8a0f40000150, type: 3}
-  baseDamage: 4
-  speed: 1
+  baseDamage: 7
+  speed: 2.8
   size: {x: 2, y: 1}
