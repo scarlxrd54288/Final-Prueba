@@ -8,7 +8,6 @@ public class TrafficManager : MonoBehaviour
     [SerializeField] private CarPoolManager carPool;
     [SerializeField] public List<Lane> lanes;
 
-
     [Header("Grid References")]
     [SerializeField] private Grid grid;
 
@@ -24,6 +23,22 @@ public class TrafficManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    private void OnEnable()
+    {
+        // Suscribirse a cambios de estado del juego
+        if (PointManager.Instance != null)
+        {
+            PointManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (PointManager.Instance != null)
+        {
+            PointManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        }
+    }
 
     private void Start()
     {
@@ -116,6 +131,64 @@ public class TrafficManager : MonoBehaviour
     {
         currentWave++;
         Debug.Log($"[OLEADA] Nueva oleada: {currentWave}");
+    }
+
+    // ESTE MÉTODO APLICA LOS CAMBIOS DE DIFICULTAD POR ESTADO
+    private void OnGameStateChanged(PointManager.GameState newState)
+    {
+        switch (newState)
+        {
+            case PointManager.GameState.Wave1:
+                currentWave = 1;
+                AdjustLaneSpeeds(1.2f);
+                AdjustLaneSpawnMultipliers(0.9f); // 10% más rápido
+                Debug.Log("[TrafficManager] Wave1: autos un poco más rápidos y más frecuentes.");
+                break;
+
+            case PointManager.GameState.BetweenWaves:
+                currentWave = 0;
+                AdjustLaneSpeeds(1.0f);
+                AdjustLaneSpawnMultipliers(1.0f); // Normaliza
+                Debug.Log("[TrafficManager] Entre oleadas: ritmo normal.");
+                break;
+
+            case PointManager.GameState.Wave2:
+                currentWave = 2;
+                AdjustLaneSpeeds(1.5f);
+                AdjustLaneSpawnMultipliers(0.7f); // 30% más rápido
+                Debug.Log("[TrafficManager] Wave2: autos rápidos y aparecen más seguido.");
+                break;
+
+            case PointManager.GameState.Victory:
+            case PointManager.GameState.GameOver:
+                StopAllTraffic();
+                Debug.Log("[TrafficManager] Tráfico detenido (fin de juego).");
+                break;
+        }
+    }
+
+    private void AdjustLaneSpeeds(float multiplier)
+    {
+        foreach (var lane in lanes)
+        {
+            lane.speed *= multiplier;
+        }
+    }
+
+    private void AdjustLaneSpawnMultipliers(float multiplier)
+    {
+        foreach (var lane in lanes)
+        {
+            lane.spawnMultiplier = multiplier;
+        }
+    }
+
+    private void StopAllTraffic()
+    {
+        foreach (var lane in lanes)
+        {
+            lane.active = false;
+        }
     }
 }
 

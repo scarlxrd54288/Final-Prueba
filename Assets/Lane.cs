@@ -13,13 +13,18 @@ public class Lane
     [Header("Frecuencia de Spawn")]
     public float baseSpawnInterval = 2f;
 
+    [Tooltip("Multiplicador dinámico ajustado por el TrafficManager")]
+    public float spawnMultiplier = 1f; // Nuevo campo para modificar la frecuencia externamente
+
     [HideInInspector] public float currentTimer = 0f;
 
     public List<CarController> activeCars = new List<CarController>();
 
     public float GetSpawnInterval(int wave)
     {
-        return Mathf.Clamp(baseSpawnInterval * Mathf.Pow(0.95f, wave), 0.4f, baseSpawnInterval);
+        // Combina progresión por oleada con modificador externo (TrafficManager)
+        float dynamicInterval = baseSpawnInterval * Mathf.Pow(0.95f, wave);
+        return Mathf.Clamp(dynamicInterval * spawnMultiplier, 0.4f, baseSpawnInterval);
     }
 
     public int GetBlockedCarsCount()
@@ -36,8 +41,6 @@ public class Lane
 
         return count;
     }
-
-
 
     public bool IsFullyBlocked()
     {
