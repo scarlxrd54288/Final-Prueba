@@ -108,28 +108,32 @@ public class PointManager : MonoBehaviour
         }
 
         // BetweenWaves: a los 150 puntos (por ejemplo)
-        if (currentPoints >= 150 && currentState == GameState.Wave1)
+        if (currentPoints >= 100 && currentState == GameState.Wave1)
         {
             currentState = GameState.BetweenWaves;
         }
 
         // Wave2: a los 300 puntos
-        if (currentPoints >= 300 && currentState == GameState.BetweenWaves)
+        if (currentPoints >= 200 && currentState == GameState.BetweenWaves)
         {
             currentState = GameState.Wave2;
         }
 
         // Victoria: si se bloquean todos los carriles por 10s o se alcanza 500 puntos
         //if (AllLanesBlockedForSeconds(10) || currentPoints >= 500)
-        if (currentPoints >= 500) //aumentar que sea wave2 tambien?-------------
+        if (currentPoints >= 400) //aumentar que sea wave2 tambien?-------------
         {
             currentState = GameState.Victory;
+            GameUIManager.Instance.ShowWin();
+
         }
 
         // Game Over por tiempo
         if (timer >= maxGameTime)
         {
             currentState = GameState.GameOver;
+            GameUIManager.Instance.ShowGameOver();
+
         }
 
         // Notificar si hubo cambio de estado
