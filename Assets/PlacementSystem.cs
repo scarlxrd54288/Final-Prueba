@@ -142,7 +142,6 @@ public class PlacementSystem : MonoBehaviour
 
         AudioManager.Instance.PlayPlaceObjectSound();
 
-
         GameObject prefabToUse = objData.Evolved && objData.EvolvedPrefab != null
             ? objData.EvolvedPrefab
             : objData.Prefab;
@@ -150,13 +149,25 @@ public class PlacementSystem : MonoBehaviour
         GameObject newObject = ObjectPoolManager.Instance.GetObject(prefabToUse, objData.ID);
         //Spawn
         newObject.transform.position = grid.CellToWorld(gridPosition);
+
         //Animación
         Animator objAnimator = newObject.GetComponent<Animator>();
         if (objAnimator != null)
         {
             objAnimator.SetTrigger("Entry");
         }
-        // Animacion y spawn npc
+
+        // Configura resistencia--------------------------------
+        Obstacle obst = newObject.GetComponent<Obstacle>();
+        if (obst != null)
+        {
+            obst.SetPoolID(objData.ID);
+            float resistance = objData.Evolved ? objData.EvolvedResistance : objData.BaseResistance;
+            float damage = objData.Evolved ? objData.EvolvedDamage : 0f;
+            obst.Evolve(objData.Evolved ? 1 : 0, resistance, damage, objData.Durability);
+        }
+
+        // Animación y spawn npc
 
         // Spawn NPC desde el NPCPoolManager
         NPCData npcData = npcDatabase.npcList.Find(n => n.ID == objData.ID);
@@ -167,8 +178,17 @@ public class PlacementSystem : MonoBehaviour
 
             NPC npc = npcObject.GetComponent<NPC>();
             if (npc != null)
+            {
                 npc.PlayEntry(npcData.Lifetime);
+
+                // Asociar NPC con obstáculo
+                if (obst != null)
+                {
+                    obst.SetAssociatedNPC(npc);
+                }
+            }
         }
+
 
 
 

@@ -24,6 +24,8 @@ public class Obstacle : MonoBehaviour
 
     private int hitCount = 0;
 
+    private NPC associatedNPC;
+
 
     public void SetPoolID(int id)
     {
@@ -72,7 +74,11 @@ public class Obstacle : MonoBehaviour
             globalGrid.RemoveObjectAt(pos);
         }
         */
-
+        if (associatedNPC != null)
+        {
+            associatedNPC.ForceDespawn(); // Este método lo agregaremos ahora
+            associatedNPC = null;
+        }
         //Original desde aqui----
         OnObstacleDestroyed?.Invoke(this);
         ObjectPoolManager.Instance.ReturnObject(gameObject, poolID);
@@ -133,5 +139,8 @@ public class Obstacle : MonoBehaviour
     }
 
 
-
+    public void SetAssociatedNPC(NPC npc)
+    {
+        associatedNPC = npc;
+    }
 }
