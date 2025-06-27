@@ -108,13 +108,23 @@ public class CarController : MonoBehaviour
         // Si está detenido, puede atacar
         if (isStopped)
         {
-            shouldPush = true;
-
-            if (currentObstacle != null && !currentObstacle.IsOffensive())
+            // Solo activa animación si hay obstáculo válido ofensivo o no-ofensivo
+            if (currentObstacle != null)
             {
-                Attack();
+                shouldPush = true;
+
+                if (!currentObstacle.IsOffensive())
+                {
+                    Attack();
+                }
+            }
+            else
+            {
+                // choca con otro auto: no se empuja
+                shouldPush = false;
             }
         }
+
 
         SetPushingAnimation(shouldPush);
         CheckOutOfBounds();
@@ -132,7 +142,8 @@ public class CarController : MonoBehaviour
             {
                 Debug.Log($"Raycast hit: {hit.collider.name}, Tag: {hit.collider.tag}");
 
-                if (hit.collider.CompareTag("Obstacle"))
+                //if (hit.collider.CompareTag("Obstacle"))
+                if (hit.collider.CompareTag("Obstacle") || hit.collider.CompareTag("eObstacle"))
                 {
                     Debug.Log("Detenido por obstáculo");
                     currentObstacle = hit.collider.GetComponent<Obstacle>();
