@@ -47,10 +47,13 @@ public class TrafficManager : MonoBehaviour
         else
             Debug.Log("Grid reference asignada correctamente.");
 
-        // Inicializar timers individuales
+        //Spawn valor bajo--------
         foreach (Lane lane in lanes)
         {
-            lane.currentTimer = Random.Range(0f, lane.baseSpawnInterval);
+            //lane.currentTimer = Random.Range(0f, lane.baseSpawnInterval);
+            //lane.currentTimer = lane.baseSpawnInterval;
+            lane.currentTimer = Random.Range(lane.baseSpawnInterval * 0.7f, lane.baseSpawnInterval);
+
         }
     }
 
@@ -66,13 +69,16 @@ public class TrafficManager : MonoBehaviour
             if (lane.currentTimer <= 0f)
             {
                 TrySpawnCarInLane(lane, i);
-                lane.currentTimer = lane.GetSpawnInterval(currentWave);
+                //lane.currentTimer = lane.GetSpawnInterval(currentWave);
+                lane.currentTimer = lane.GetSpawnInterval(currentWave) * Random.Range(0.9f, 1.1f);
+
             }
         }
     }
 
     private void TrySpawnCarInLane(Lane lane, int laneIndex)
     {
+        if (lane.activeCars.Count >= 5) return; //Limitee----
         Vector3Int spawnCell = grid.WorldToCell(lane.spawnPoint.position);
 
         if (placementSystem.GlobalGridData.HasObjectAt(spawnCell)) return;
@@ -83,7 +89,7 @@ public class TrafficManager : MonoBehaviour
 
         if (car != null)
         {
-            Vector3 offset = lane.direction.normalized * Random.Range(0f, 0.8f);
+            Vector3 offset = lane.direction.normalized * Random.Range(0.5f, 1.5f);
             Vector3 spawnPos = lane.spawnPoint.position + offset;
             spawnPos.y = 0f;
 
