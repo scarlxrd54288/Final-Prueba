@@ -63,9 +63,15 @@ public class Obstacle : MonoBehaviour
         }
     }
 
+    private int poolKey;
+    public void SetPoolKey(int key)
+    {
+        poolKey = key;
+    }
+
     private void DestroyObstacle()
     {
-        // 1. Borra su celda en la grilla
+        // Borra su celda en la grilla
         /*
         GridData globalGrid = PlacementSystem.Instance.GlobalGridData;
         foreach (var pos in globalGrid.CalculatePositions(
@@ -81,7 +87,9 @@ public class Obstacle : MonoBehaviour
         }
         //Original desde aqui----
         OnObstacleDestroyed?.Invoke(this);
-        ObjectPoolManager.Instance.ReturnObject(gameObject, poolID);
+        //ObjectPoolManager.Instance.ReturnObject(gameObject, poolID);
+        ObjectPoolManager.Instance.ReturnObject(gameObject, poolKey);
+
     }
 
     public void Evolve(int newLevel, float newMaxResistance, float newDamage = 0f, int newDurability = -1)

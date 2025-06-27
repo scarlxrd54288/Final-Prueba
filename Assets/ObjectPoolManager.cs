@@ -16,33 +16,27 @@ public class ObjectPoolManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public GameObject GetObject(GameObject prefab, int id)
+    public GameObject GetObject(GameObject prefab, int poolKey)
     {
-        if (!poolDictionary.ContainsKey(id))
-        {
-            poolDictionary[id] = new Queue<GameObject>();
-        }
+        if (!poolDictionary.ContainsKey(poolKey))
+            poolDictionary[poolKey] = new Queue<GameObject>();
 
-        if (poolDictionary[id].Count > 0)
+        if (poolDictionary[poolKey].Count > 0)
         {
-            GameObject obj = poolDictionary[id].Dequeue();
+            GameObject obj = poolDictionary[poolKey].Dequeue();
             obj.SetActive(true);
             return obj;
         }
-        else
-        {
-            return Instantiate(prefab);
-        }
+
+        return Instantiate(prefab);
     }
 
-    public void ReturnObject(GameObject obj, int id)
+    public void ReturnObject(GameObject obj, int poolKey)
     {
         obj.SetActive(false);
-        if (!poolDictionary.ContainsKey(id))
-        {
-            poolDictionary[id] = new Queue<GameObject>();
-        }
-        poolDictionary[id].Enqueue(obj);
+        if (!poolDictionary.ContainsKey(poolKey))
+            poolDictionary[poolKey] = new Queue<GameObject>();
+        poolDictionary[poolKey].Enqueue(obj);
     }
 }
 

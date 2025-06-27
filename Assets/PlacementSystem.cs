@@ -97,7 +97,12 @@ public class PlacementSystem : MonoBehaviour
         if (selectedObjectIndex < 0)
             return;
 
-        var objData = database.objectsData[selectedObjectIndex];
+        //var objData = database.objectsData[selectedObjectIndex];
+        //var objData = PointManager.Instance.GetObjectData(selectedObjectIndex);
+        var objectID = database.objectsData[selectedObjectIndex].ID;
+        var objData = PointManager.Instance.GetObjectData(objectID);
+
+
         var type = GridObjectType.Obstacle;
 
 
@@ -146,7 +151,15 @@ public class PlacementSystem : MonoBehaviour
             ? objData.EvolvedPrefab
             : objData.Prefab;
 
-        GameObject newObject = ObjectPoolManager.Instance.GetObject(prefabToUse, objData.ID);
+
+        // Ejemplo: clave  = ID * 10 + variante
+        // variante 0 = normal, 1 = evolved
+        int variant = objData.Evolved ? 1 : 0;
+        int poolKey = objData.ID * 10 + variant;
+
+        GameObject newObject = ObjectPoolManager.Instance.GetObject(prefabToUse, poolKey);
+
+        //GameObject newObject = ObjectPoolManager.Instance.GetObject(prefabToUse, objData.ID);
         //Spawn
         newObject.transform.position = grid.CellToWorld(gridPosition);
 

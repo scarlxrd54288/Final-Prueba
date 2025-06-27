@@ -72,7 +72,7 @@ public class CarController : MonoBehaviour
     void Update()
     {
         Debug.DrawRay(transform.position, direction * 0.6f, Color.red);
-        Debug.Log($"isStopped: {isStopped}, isPushingObstacle: {isPushingObstacle}");
+        //Debug.Log($"isStopped: {isStopped}, isPushingObstacle: {isPushingObstacle}");
 
         if (!isInitialized) return;
 
