@@ -35,10 +35,11 @@ MonoBehaviour:
     Lifetime: 2.11
   - Name: a
     ID: 4
-    Prefab: {fileID: 854817310025913589, guid: 05e2d6ab84f23ca4081799958f39df3c, type: 3}
+    Prefab: {fileID: 6688681024433945989, guid: a56f5dd788065a94fba390ee1981b386,
+      type: 3}
     Lifetime: 2.11
   - Name: a
     ID: 5
-    Prefab: {fileID: 2887777745731642743, guid: 637d9b14f86bb414e873e1600637a10e,
+    Prefab: {fileID: 5266186307249953316, guid: 069b82d06f3bdec4e84bf331d7e11349,
       type: 3}
-    Lifetime: 2.11
+    Lifetime: 1
