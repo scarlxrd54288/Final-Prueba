@@ -120,20 +120,22 @@ public class PointManager : MonoBehaviour
         }
 
         // Victoria: si se bloquean todos los carriles por 10s o se alcanza 500 puntos
-        //if (AllLanesBlockedForSeconds(10) || currentPoints >= 500)
-        if (currentPoints >= 400) //aumentar que sea wave2 tambien?-------------
+        //if (AllLanesBlockedForSeconds(10) || currentPoints >= 400)
+        if (currentPoints >= 400 && currentState != GameState.Victory)
         {
             currentState = GameState.Victory;
             GameUIManager.Instance.ShowWin();
-
+            OnGameStateChanged?.Invoke(currentState);//ver------
+            return; // Evita que se ejecute más código ese frame
         }
 
         // Game Over por tiempo
-        if (timer >= maxGameTime)
+        if (timer >= maxGameTime && currentState != GameState.GameOver)
         {
             currentState = GameState.GameOver;
             GameUIManager.Instance.ShowGameOver();
-
+            OnGameStateChanged?.Invoke(currentState);//verrr
+            return;
         }
 
         // Notificar si hubo cambio de estado

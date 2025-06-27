@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text pointsText;
     public TMP_Text stateText;
     public Slider timerSlider;
+    public TMP_Text timerText;
 
     [Header("Botones de Obstáculos")]
     public List<Image> obstacleButtons; // Imagen de cada botón
@@ -63,13 +64,21 @@ public class UIManager : MonoBehaviour
         if (PointManager.Instance.currentState != PointManager.GameState.Victory &&
             PointManager.Instance.currentState != PointManager.GameState.GameOver)
         {
-            timerSlider.value = PointManager.Instance.GetTimeLeft();
+            float timeLeft = PointManager.Instance.GetTimeLeft();
+            timerSlider.value = timeLeft;
+
+
+            int minutes = Mathf.FloorToInt(timeLeft / 60f);
+            int seconds = Mathf.FloorToInt(timeLeft % 60f);
+            timerText.text = $"{minutes:00}:{seconds:00}";
         }
         else
         {
             timerSlider.gameObject.SetActive(false);
+            timerText.gameObject.SetActive(false);
         }
     }
+
 
     private void UpdatePoints(int value)
     {
