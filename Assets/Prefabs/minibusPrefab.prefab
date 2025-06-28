@@ -161,6 +161,8 @@ MonoBehaviour:
   detectionMask:
     serializedVersion: 2
     m_Bits: 1
+  warningEffectPrefab: {fileID: 858614317696090973, guid: 29d38360b058f554ea3ebc4d602c7b4e,
+    type: 3}
 --- !u!65 &214828198954383479
 BoxCollider:
   m_ObjectHideFlags: 0

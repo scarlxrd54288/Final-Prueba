@@ -33,6 +33,10 @@ public class CarController : MonoBehaviour
     private bool playedCrashThisStop = false;
     private bool wasStoppedLastFrame = false;
 
+    // === Monedaaa ===
+    [SerializeField] private GameObject warningEffectPrefab; 
+    private bool warningShown = false; 
+
 
     private void Awake()
     {
@@ -161,6 +165,13 @@ public class CarController : MonoBehaviour
                         currentObstacle.ApplyDamageToCar(this);
                     }
 
+                    if (!warningShown && warningEffectPrefab != null)
+                    {
+                        GameObject effect = Instantiate(warningEffectPrefab, transform.position + Vector3.up * 1.2f, Quaternion.identity);
+                        effect.transform.SetParent(transform); // Optional: stick it to the car
+                        Destroy(effect, 2f); // Remove after 2 seconds
+                        warningShown = true;
+                    }
                     return;
                 }
 

@@ -159,15 +159,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1823721891706967208}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 3774662307523326132}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6364306568469658986}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1823721891706967208}
   m_SourcePrefab: {fileID: 100100000, guid: 8fbebd4b8a8c1b24fa3d049326fe8e13, type: 3}
 --- !u!1 &8649573377048506150 stripped
 GameObject:
@@ -196,6 +196,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1823721891706967208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8649573377048506150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e4cf79eb501c14d99466ff7a17399a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStopped: 0
+  maxHealth: 50
+  detectionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  warningEffectPrefab: {fileID: 858614317696090973, guid: 29d38360b058f554ea3ebc4d602c7b4e,
+    type: 3}
 --- !u!65 &3774662307523326132
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -244,20 +263,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1823721891706967208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8649573377048506150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01e4cf79eb501c14d99466ff7a17399a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isStopped: 0
-  maxHealth: 50
-  detectionMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
