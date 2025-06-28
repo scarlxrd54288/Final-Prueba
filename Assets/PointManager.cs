@@ -32,6 +32,8 @@ public class PointManager : MonoBehaviour
             obj.Evolved = false;
             obj.CooldownTimer = 0f;
         }
+        //VoiceOverSystem.Instance.PlaySaludo();
+
     }
 
 
@@ -81,6 +83,10 @@ public class PointManager : MonoBehaviour
             {
                 obj.Unlocked = true;
                 Debug.Log($"Obstacle {obj.Name} desbloqueado!");
+                if (obj.ID != 0)
+                {
+                    AudioManager.Instance.PlayUnlockSound();
+                }
             }
         }
     }
@@ -117,6 +123,8 @@ public class PointManager : MonoBehaviour
         if (currentPoints >= 200 && currentState == GameState.BetweenWaves)
         {
             currentState = GameState.Wave2;
+            VoiceOverSystem.Instance.PlayEnojado();
+
         }
 
         // Victoria: si se bloquean todos los carriles por 10s o se alcanza 500 puntos
@@ -124,6 +132,7 @@ public class PointManager : MonoBehaviour
         if (currentPoints >= 400 && currentState != GameState.Victory)
         {
             currentState = GameState.Victory;
+            VoiceOverSystem.Instance.PlayWinVoice();
             GameUIManager.Instance.ShowWin();
             OnGameStateChanged?.Invoke(currentState);//ver------
             return; // Evita que se ejecute más código ese frame
@@ -133,6 +142,7 @@ public class PointManager : MonoBehaviour
         if (timer >= maxGameTime && currentState != GameState.GameOver)
         {
             currentState = GameState.GameOver;
+            VoiceOverSystem.Instance.PlayGameOverVoice();
             GameUIManager.Instance.ShowGameOver();
             OnGameStateChanged?.Invoke(currentState);//verrr
             return;

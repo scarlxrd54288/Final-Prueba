@@ -14,6 +14,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip placeErrorClip;
     [SerializeField] private AudioClip carCrashClip;
     [SerializeField] private AudioClip buttonClickClip;
+    [SerializeField] private AudioClip unlockClip;
+
 
     [Header("Looping")]
     [SerializeField] private AudioClip musicLoop;
@@ -96,6 +98,11 @@ public class AudioManager : MonoBehaviour
 
         Destroy(tempGO, clip.length / pitch);
     }
+    public void PlayUnlockSound()
+    {
+        PlaySFX(unlockClip);
+    }
+
 
     // === Music & Ambient ===
     private void PlayMusicLoop()
