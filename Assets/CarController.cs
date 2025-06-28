@@ -1,5 +1,8 @@
 using System;
 using UnityEngine;
+using System.Collections;         
+using System.Collections.Generic; 
+
 
 public class CarController : MonoBehaviour
 {
@@ -33,15 +36,18 @@ public class CarController : MonoBehaviour
     private bool playedCrashThisStop = false;
     private bool wasStoppedLastFrame = false;
 
-    // === Monedaaa ===
-    [SerializeField] private GameObject warningEffectPrefab; 
-    private bool warningShown = false; 
+    // Monedaaa----------
+    //[SerializeField] private GameObject warningEffectPrefab; 
+    private bool hasSpawnedCoin = false; 
+
+
 
 
     private void Awake()
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
+
     }
 
     public void Initialize(Vector3 direction, float speed, float damagePerSecond, int typeIndex, CarPoolManager poolManager, GridData carTrafficData, Grid grid)
@@ -53,6 +59,9 @@ public class CarController : MonoBehaviour
         this.poolManager = poolManager;
         this.carTrafficData = carTrafficData;
         this.grid = grid;
+        //Monedaaas---
+        hasSpawnedCoin = false;
+
 
         currentHealth = maxHealth;
 
@@ -159,19 +168,24 @@ public class CarController : MonoBehaviour
                 {
                     currentObstacle = hit.collider.GetComponent<Obstacle>();
                     isStopped = true;
-
-                    if (currentObstacle != null && currentObstacle.IsOffensive())
+                    //Moneda
+                    if (!hasSpawnedCoin)
                     {
-                        currentObstacle.ApplyDamageToCar(this);
+                        CoinPoolManager.Instance.SpawnCoin(transform.position + Vector3.up * 1.3f);
+                        hasSpawnedCoin = true;
                     }
 
-                    if (!warningShown && warningEffectPrefab != null)
+
+
+                    /*
+                    if (!hasSpawnedCoin && warningEffectPrefab != null)
                     {
                         GameObject effect = Instantiate(warningEffectPrefab, transform.position + Vector3.up * 1.3f, Quaternion.identity);
                         effect.transform.SetParent(transform); // Optional: stick it to the car
                         Destroy(effect, 2f); // Remove after 2 seconds
                         warningShown = true;
                     }
+                    */
                     return;
                 }
 
@@ -221,6 +235,9 @@ public class CarController : MonoBehaviour
             isStopped = false;
             currentObstacle = null;
             playedCrashThisStop = false;
+            //Moneda----
+            //hasSpawnedCoin = false;
+
         }
     }
 
@@ -283,6 +300,7 @@ public class CarController : MonoBehaviour
         isPushingObstacle = isPushing;
         animator.SetBool("isPushing", isPushing);
     }
+
 }
 
 

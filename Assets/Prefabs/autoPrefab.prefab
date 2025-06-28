@@ -213,8 +213,9 @@ MonoBehaviour:
   detectionMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  warningEffectPrefab: {fileID: 858614317696090973, guid: 29d38360b058f554ea3ebc4d602c7b4e,
+  coinPrefab: {fileID: 858614317696090973, guid: 29d38360b058f554ea3ebc4d602c7b4e,
     type: 3}
+  coinPoolSize: 5
 --- !u!65 &3774662307523326132
 BoxCollider:
   m_ObjectHideFlags: 0
