@@ -49,5 +49,11 @@ public class IntroVideoController : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
+
+    public void GoToTutorial()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Tutorial");
+    }
 }
 

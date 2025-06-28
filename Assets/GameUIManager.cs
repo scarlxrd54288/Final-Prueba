@@ -130,6 +130,12 @@ public class GameUIManager : MonoBehaviour
     {
         sfxToggleImage.sprite = sfxEnabled ? sfxOnSprite : sfxOffSprite;
     }
+
+    public void GoToTutorial()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Tutorial");
+    }
 }
 
 
