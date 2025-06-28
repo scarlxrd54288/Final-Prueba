@@ -30,7 +30,6 @@ public class VoiceOverSystem : MonoBehaviour
 
     private void Start()
     {
-        // Reproducir saludo automáticamente al inicio
         //PlayVoiceWithEmotion(saludoClip, "Feliz");
         PlaySaludo();
     }
@@ -70,10 +69,8 @@ public class VoiceOverSystem : MonoBehaviour
         voiceSource.clip = clip;
         voiceSource.Play();
 
-        // Activar parámetro
         characterAnimator.SetBool(boolParameter, true);
 
-        // Usar duración del clip o duración personalizada
         float duration = customDuration > 0 ? customDuration : clip.length;
         StartCoroutine(ResetBoolAfterDelay(boolParameter, duration));
     }

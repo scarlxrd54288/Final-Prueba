@@ -54,13 +54,13 @@ public class AudioManager : MonoBehaviour
         PlayAmbientLoop();
     }
 
-    // === Sound FX Methods ===
+    //SFX
     public void PlayPlaceObjectSound() => PlaySFX(placeObjectClip);
     public void PlayPlaceErrorSound() => PlaySFX(placeErrorClip);
     public void PlayButtonClickSound() => PlaySFX(buttonClickClip);
 
     private bool canPlayCrash = true;
-    public float crashCooldown = 0.5f; // medio segundo de cooldown
+    public float crashCooldown = 0.5f; 
 
     public void PlayCrashSound()
     {
@@ -79,7 +79,7 @@ public class AudioManager : MonoBehaviour
         canPlayCrash = true;
     }
 
-    // Nuevo método que crea un AudioSource temporal para pitch independiente
+
     private void PlaySFX(AudioClip clip)
     {
         PlaySFX(clip, sfxVolume, UnityEngine.Random.Range(pitchMin, pitchMax));
@@ -104,7 +104,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    // === Music & Ambient ===
+    //Musica y ambiuente en loop
     private void PlayMusicLoop()
     {
         if (musicLoop != null)
@@ -125,7 +125,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // === Volume Controls (for sliders/UI) ===
+    //Slides para volumen
     public void SetMusicVolume(float value)
     {
         musicVolume = value;
@@ -142,8 +142,9 @@ public class AudioManager : MonoBehaviour
         ambientVolume = value;
         ambientSource.volume = ambientVolume;
     }
+    
 
-    // === Pitch controls for UI ===
+    //Pitch slders
     public void SetSFXPitchMin(float value)
     {
         pitchMin = value;

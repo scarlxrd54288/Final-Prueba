@@ -16,7 +16,7 @@ public class CoinPoolManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // opcional pero útil
+            DontDestroyOnLoad(gameObject); 
             InitializePool();
         }
         else

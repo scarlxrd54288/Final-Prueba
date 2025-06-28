@@ -25,7 +25,6 @@ public class TrafficManager : MonoBehaviour
 
     private void OnEnable()
     {
-        // Suscribirse a cambios de estado del juego
         if (PointManager.Instance != null)
         {
             PointManager.Instance.OnGameStateChanged += OnGameStateChanged;
@@ -139,7 +138,7 @@ public class TrafficManager : MonoBehaviour
         Debug.Log($"[OLEADA] Nueva oleada: {currentWave}");
     }
 
-    // ESTE MÉTODO APLICA LOS CAMBIOS DE DIFICULTAD POR ESTADO
+    //Cambios de dificultad según oleada
     private void OnGameStateChanged(PointManager.GameState newState)
     {
         switch (newState)
@@ -147,21 +146,21 @@ public class TrafficManager : MonoBehaviour
             case PointManager.GameState.Wave1:
                 currentWave = 1;
                 AdjustLaneSpeeds(1.2f);
-                AdjustLaneSpawnMultipliers(0.9f); // 10% más rápido
+                AdjustLaneSpawnMultipliers(0.9f); //10% más rápido
                 Debug.Log("[TrafficManager] Wave1: autos un poco más rápidos y más frecuentes.");
                 break;
 
             case PointManager.GameState.BetweenWaves:
                 currentWave = 0;
                 AdjustLaneSpeeds(1.0f);
-                AdjustLaneSpawnMultipliers(1.0f); // Normaliza
+                AdjustLaneSpawnMultipliers(1.0f); //vuelve a calm
                 Debug.Log("[TrafficManager] Entre oleadas: ritmo normal.");
                 break;
 
             case PointManager.GameState.Wave2:
                 currentWave = 2;
                 AdjustLaneSpeeds(1.5f);
-                AdjustLaneSpawnMultipliers(0.7f); // 30% más rápido
+                AdjustLaneSpawnMultipliers(0.7f); //30% más rápido
                 Debug.Log("[TrafficManager] Wave2: autos rápidos y aparecen más seguido.");
                 break;
 

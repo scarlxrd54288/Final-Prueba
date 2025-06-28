@@ -40,11 +40,10 @@ public class GameUIManager : MonoBehaviour
 
     private void Start()
     {
-        // Guardar los valores originales definidos en el AudioManager
+        
         originalMusicVolume = AudioManager.Instance.musicVolume;
         originalSFXVolume = AudioManager.Instance.sfxVolume;
 
-        // Aplicar sprites iniciales
         UpdateMusicIcon();
         UpdateSFXIcon();
     }

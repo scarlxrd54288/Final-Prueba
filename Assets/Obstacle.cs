@@ -19,7 +19,7 @@ public class Obstacle : MonoBehaviour
 
     [SerializeField] private float damage = 0f;
     public float Damage => damage;
-    [SerializeField] private int durability = 0; // -1 = infinito
+    [SerializeField] private int durability = 0; //-1 = infinito
     private int damageCount = 0;
 
     private int hitCount = 0;
@@ -41,7 +41,6 @@ public class Obstacle : MonoBehaviour
     {
         currentResistance = maxResistance;
 
-        // Revisa si está evolucionado y aplica solo si debe
         if (PointManager.Instance.IsEvolved(poolID))
         {
             var data = PointManager.Instance.GetObjectData(poolID);
@@ -52,7 +51,7 @@ public class Obstacle : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        Debug.Log($"{gameObject.name} recibe {amount} de daño. Resistencia actual: {currentResistance} -> {currentResistance - amount}");
+        //Debug.Log($"{gameObject.name} recibe {amount} de daño. Resistencia actual: {currentResistance} -> {currentResistance - amount}");
 
         currentResistance -= amount;
         if (currentResistance <= 0)
@@ -82,7 +81,7 @@ public class Obstacle : MonoBehaviour
         */
         if (associatedNPC != null)
         {
-            associatedNPC.ForceDespawn(); // Este método lo agregaremos ahora
+            associatedNPC.ForceDespawn(); 
             associatedNPC = null;
         }
         //Original desde aqui----
@@ -102,7 +101,7 @@ public class Obstacle : MonoBehaviour
         damage = newDamage;
         durability = newDurability;
         hitCount = 0;
-        Debug.Log($"{gameObject.name} evolucionado. Damage = {damage}, Durability = {durability}");
+        //Debug.Log($"{gameObject.name} evolucionado. Damage = {damage}, Durability = {durability}");
 
     }
 
@@ -126,7 +125,7 @@ public class Obstacle : MonoBehaviour
         if (durability > 0)
         {
             damageCount++;
-            Debug.Log($"{gameObject.name} ha dañado un auto. Golpes recibidos: {damageCount}/{durability}");
+            //Debug.Log($"{gameObject.name} ha dañado un auto. Golpes recibidos: {damageCount}/{durability}");
 
             if (damageCount >= durability)
             {
@@ -135,7 +134,7 @@ public class Obstacle : MonoBehaviour
         }
         else
         {
-            Debug.Log($"{gameObject.name} tiene durabilidad infinita.");
+            //Debug.Log($"{gameObject.name} tiene durabilidad infinita.");
         }
     }
 

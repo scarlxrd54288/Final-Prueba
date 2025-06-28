@@ -22,7 +22,6 @@ public class NPCPoolManager : MonoBehaviour
 
     public GameObject GetNPC(int id)
     {
-        // Buscar datos del NPC
         var npcData = npcDatabase.npcList.Find(n => n.ID == id);
         if (npcData == null)
         {
@@ -30,13 +29,11 @@ public class NPCPoolManager : MonoBehaviour
             return null;
         }
 
-        // Si no existe la cola aún, créala
         if (!npcPools.ContainsKey(id))
         {
             npcPools[id] = new Queue<GameObject>();
         }
 
-        // Reutilizar si hay en la cola
         if (npcPools[id].Count > 0)
         {
             GameObject npc = npcPools[id].Dequeue();
@@ -44,7 +41,6 @@ public class NPCPoolManager : MonoBehaviour
             return npc;
         }
 
-        // Si no hay en cola, instanciar uno nuevo
         return Instantiate(npcData.Prefab);
     }
 

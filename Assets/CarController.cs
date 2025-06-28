@@ -87,7 +87,7 @@ public class CarController : MonoBehaviour
 
     void Update()
     {
-        Debug.DrawRay(transform.position, direction * 0.6f, Color.red);
+        //Debug.DrawRay(transform.position, direction * 0.6f, Color.red);
         //Debug.Log($"isStopped: {isStopped}, isPushingObstacle: {isPushingObstacle}");
 
         if (!isInitialized) return;
@@ -102,14 +102,11 @@ public class CarController : MonoBehaviour
             TryResumeMovement();
         }
 
-        // NO pongas shouldPush aquí todavía
-        bool shouldPush = false;
+               bool shouldPush = false;
 
         if (!isStopped)
         {
-            Move(); // <-- Aquí es donde puede cambiar isStopped
-
-            // Vuelve a evaluar raycast ofensivo por seguridad
+            Move();
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.6f, detectionMask))
             {
                 Obstacle obs = hit.collider.GetComponent<Obstacle>();
@@ -120,15 +117,13 @@ public class CarController : MonoBehaviour
                 }
             }
         }
-
-        // Si el auto acaba de detenerse este frame, sonar crash una vez
+ 
         if (isStopped && !playedCrashThisStop)
         {
             AudioManager.Instance.PlayCrashSound();
             playedCrashThisStop = true;
         }
-
-        // Si está detenido, puede atacar
+ 
         if (isStopped)
         {
             if (currentObstacle != null)
@@ -142,7 +137,7 @@ public class CarController : MonoBehaviour
             }
             else
             {
-                // choca con otro auto: no se empuja
+                //noemepuja con otro auto---
                 shouldPush = false;
             }
         }
@@ -162,7 +157,8 @@ public class CarController : MonoBehaviour
         {
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.7f, detectionMask))
             {
-                Debug.Log($"Raycast hit: {hit.collider.name}, Tag: {hit.collider.tag}");
+                //ver si colisiona
+                //Debug.Log($"Raycast hit: {hit.collider.name}, Tag: {hit.collider.tag}");
 
                 if (hit.collider.CompareTag("Obstacle") || hit.collider.CompareTag("eObstacle"))
                 {
@@ -296,7 +292,7 @@ public class CarController : MonoBehaviour
 
         if (isPushingObstacle == isPushing) return;
 
-        Debug.Log($"SetPushingAnimation: {isPushing}");//Nunca sale esto en la consola
+        Debug.Log($"SetPushingAnimation: {isPushing}");
         isPushingObstacle = isPushing;
         animator.SetBool("isPushing", isPushing);
     }

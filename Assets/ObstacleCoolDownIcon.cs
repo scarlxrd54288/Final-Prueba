@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ObstacleCooldownIcon : MonoBehaviour
 {
-    public int obstacleID; // ID del obstáculo asignado en Inspector
+    public int obstacleID; 
     private Image buttonImage;
     private Button button;
 
@@ -25,8 +25,7 @@ public class ObstacleCooldownIcon : MonoBehaviour
         ObjectData objData = objectDatabase.objectsData.Find(o => o.ID == obstacleID);
         if (objData == null)
             return;
-
-        //  Si no está desbloqueado, botón desactivado y gris
+        //Desbloquedo---gris
         if (!objData.Unlocked)
         {
             button.interactable = false;

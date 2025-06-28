@@ -106,7 +106,7 @@ public class PlacementSystem : MonoBehaviour
         var type = GridObjectType.Obstacle;
 
 
-        // Verificar si el objeto está desbloqueado antes de colocarlo
+        //Verificar si esta bloqueado o en cooldown
         if (!objData.Unlocked || objData.CooldownTimer > 0f)
         {
             Debug.Log($"[PlacementSystem] Objeto bloqueado o en cooldown: {objData.Name}");
@@ -122,7 +122,7 @@ public class PlacementSystem : MonoBehaviour
 
 
 
-        // Verificamos si hay un auto físicamente en la celda
+        //Verificamos en la celda
         Vector3 worldPos = grid.CellToWorld(gridPosition) + new Vector3(0.5f, 0.5f, 0.5f); // centro de celda
         Vector3 boxSize = new Vector3(objData.Size.x, 1f, objData.Size.y);
 
@@ -152,8 +152,7 @@ public class PlacementSystem : MonoBehaviour
             : objData.Prefab;
 
 
-        // Ejemplo: clave  = ID * 10 + variante
-        // variante 0 = normal, 1 = evolved
+      
         int variant = objData.Evolved ? 1 : 0;
         int poolKey = objData.ID * 10 + variant;
 
@@ -170,7 +169,7 @@ public class PlacementSystem : MonoBehaviour
             objAnimator.SetTrigger("Entry");
         }
 
-        // Configura resistencia--------------------------------
+        //Configura resistencia--------------------------------
         Obstacle obst = newObject.GetComponent<Obstacle>();
         if (obst != null)
         {
@@ -180,9 +179,8 @@ public class PlacementSystem : MonoBehaviour
             obst.Evolve(objData.Evolved ? 1 : 0, resistance, damage, objData.Durability);
         }
 
-        // Animación y spawn npc
 
-        // Spawn NPC desde el NPCPoolManager
+        //NPC
         NPCData npcData = npcDatabase.npcList.Find(n => n.ID == objData.ID);
         if (npcData != null)
         {
@@ -194,7 +192,6 @@ public class PlacementSystem : MonoBehaviour
             {
                 npc.PlayEntry(npcData.Lifetime);
 
-                // Asociar NPC con obstáculo
                 if (obst != null)
                 {
                     obst.SetAssociatedNPC(npc);

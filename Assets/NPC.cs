@@ -35,10 +35,10 @@ public class NPC : MonoBehaviour
 
     public void ForceDespawn()
     {
-        // Cancela cualquier coroutine o animación activa
+        
         //StopAllCoroutines();
 
-        // Vuelve al pool inmediatamente
+    
         NPCPoolManager.Instance.ReturnNPC(gameObject, poolID);
     }
 

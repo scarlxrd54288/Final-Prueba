@@ -20,11 +20,11 @@ public class CarControllerAlternate : MonoBehaviour
     public bool isStopped;
     private bool isInitialized = false;
 
-    // Tiempo de gracia para evitar que el raycast detecte el propio coche al spawnear
+    //Tiempo de gracia para evitar que el raycast detecte el propio coche al spawnear
     private float spawnGraceTime = 0.1f;
     private float spawnTimer = 0f;
 
-    // Evento que avisa cuando el auto se retira
+    //Evento que avisa cuando el auto se retira
     public event Action OnCarRemoved;
 
     [SerializeField] private float maxHealth = 10f;
@@ -84,8 +84,6 @@ public class CarControllerAlternate : MonoBehaviour
         if (!isStopped)
         {
             Move();
-
-            // Comprobamos si hay un obstáculo ofensivo enfrente
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.6f))
             {
                 Obstacle obs = hit.collider.GetComponent<Obstacle>();
@@ -93,18 +91,16 @@ public class CarControllerAlternate : MonoBehaviour
                 {
                     //CAmibiar en osbtaclee-----------------
                     //obs.ApplyDamageToCar(this);
-                    return; // El auto solo recibe daño, NO ataca
+                    return; 
                 }
             }
         }
         else
         {
-            // Si estamos detenidos y el obstáculo NO es ofensivo, lo atacamos
             if (currentObstacle != null && !currentObstacle.IsOffensive())
             {
                 Attack();
             }
-            // Si es ofensivo, no hacemos nada: solo esperamos y recibimos daño por raycast
         }
 
         CheckOutOfBounds();
@@ -118,7 +114,6 @@ public class CarControllerAlternate : MonoBehaviour
         Vector3 targetPosition = transform.position + direction * speed * Time.deltaTime;
         Vector3Int nextCell = grid.WorldToCell(targetPosition);
 
-        // Raycast solo si ya terminó el tiempo de gracia
         
         if (spawnTimer <= 0f)
         {
@@ -129,10 +124,10 @@ public class CarControllerAlternate : MonoBehaviour
                 {
                     currentObstacle = obs;
                     isStopped = true;
-                    if (!hasPlayedCrashSound) // Solo si no se ha reproducido aún
+                    if (!hasPlayedCrashSound) 
                     {
                         AudioManager.Instance.PlayCrashSound();
-                        hasPlayedCrashSound = true; // Marcar que ya sonó
+                        hasPlayedCrashSound = true; 
                     }
                     return;
                 }
@@ -142,10 +137,10 @@ public class CarControllerAlternate : MonoBehaviour
                 {
                     isStopped = true;
                     currentObstacle = null;
-                    if (!hasPlayedCrashSound) // Solo si no se ha reproducido aún
+                    if (!hasPlayedCrashSound) 
                     {
                         AudioManager.Instance.PlayCrashSound();
-                        hasPlayedCrashSound = true; // Marcar que ya sonó
+                        hasPlayedCrashSound = true; 
                     }
                     return;
                 }
@@ -166,7 +161,7 @@ public class CarControllerAlternate : MonoBehaviour
             carTrafficData.RemoveObjectAt(currentCell);
             carTrafficData.AddObjectAt(nextCell, Vector2Int.one, -1, -1, GridObjectType.Car);
             currentCell = nextCell;
-            // Un solo sonido de choque por movimiento
+            //Sonido de choque---
             hasPlayedCrashSound = false;
         }
 

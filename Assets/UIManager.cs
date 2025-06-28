@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     public TMP_Text timerText;
 
     [Header("Botones de Obstáculos")]
-    public List<Image> obstacleButtons; // Imagen de cada botón
+    public List<Image> obstacleButtons; 
 
     [Header("Sprites compartidos")]
     public Sprite normalSprite;
@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
 
     private float maxTime;
 
-    [SerializeField] private Color evolvedColor = new Color(1f, 0.8f, 0.4f); // dorado suave
+    [SerializeField] private Color evolvedColor = new Color(1f, 0.8f, 0.4f); 
     [SerializeField] private float animationDuration = 0.3f;
 
 
@@ -111,7 +111,7 @@ public class UIManager : MonoBehaviour
             img.sprite = evolvedSprite;
         
         }
-        // Iniciar animación simple
+        
         StartCoroutine(AnimateEvolveButton(btn));
 
     }*/

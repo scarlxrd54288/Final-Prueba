@@ -34,15 +34,23 @@ public class InputManager : MonoBehaviour
 
 
 
+
+
+
+    void Start()
+    {
+        
+    }
+
     public Vector3 GetSelectedMapPosition()
     {
-       /*        Ray ray = sceneCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, placementLayermask))
-        {
-            return hit.point;
-        }
-        return Vector3.zero;*/
+        /*        Ray ray = sceneCamera.ScreenPointToRay(Input.mousePosition);
+         RaycastHit hit;
+         if (Physics.Raycast(ray, out hit, Mathf.Infinity, placementLayermask))
+         {
+             return hit.point;
+         }
+         return Vector3.zero;*/
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = sceneCamera.nearClipPlane; // Set the z position to the near clip plane
         Ray ray = sceneCamera.ScreenPointToRay(mousePos);
@@ -58,13 +66,4 @@ public class InputManager : MonoBehaviour
     }
 
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-  
 }

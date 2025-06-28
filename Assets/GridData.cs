@@ -80,7 +80,7 @@ public class GridData
     }
 
     public Vector2Int gridMin = new Vector2Int(-11, -2);
-    public Vector2Int gridMax = new Vector2Int(11, 2); // Modificá según tu nivel real
+    public Vector2Int gridMax = new Vector2Int(11, 2); 
 
     public bool IsInsideBounds(Vector3Int pos)
     {

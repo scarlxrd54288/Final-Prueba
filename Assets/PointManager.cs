@@ -13,7 +13,7 @@ public class PointManager : MonoBehaviour
 
     private float allLanesBlockedTime = 0f;
     private float timer = 0f;
-    [SerializeField] private float maxGameTime = 300f; // 5 minutos
+    [SerializeField] private float maxGameTime = 300f; 
 
     public event Action<int> OnPointsUpdated;
     public event Action<GameState> OnGameStateChanged;
@@ -25,7 +25,6 @@ public class PointManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        // Resetear todos los objetos al iniciar
         foreach (var obj in objectDatabase.objectsData)
         {
             obj.Unlocked = false;
@@ -107,19 +106,19 @@ public class PointManager : MonoBehaviour
     {
         GameState previousState = currentState;
 
-        // Wave1: a los 50 puntos
+        //Wave1: 50 puntos
         if (currentPoints >= 50 && currentState == GameState.Calm)
         {
             currentState = GameState.Wave1;
         }
 
-        // BetweenWaves: a los 150 puntos (por ejemplo)
+        //BetweenWaves: 150 puntos 
         if (currentPoints >= 100 && currentState == GameState.Wave1)
         {
             currentState = GameState.BetweenWaves;
         }
 
-        // Wave2: a los 300 puntos
+        //Wave2: 300 puntos
         if (currentPoints >= 200 && currentState == GameState.BetweenWaves)
         {
             currentState = GameState.Wave2;
@@ -127,7 +126,7 @@ public class PointManager : MonoBehaviour
 
         }
 
-        // Victoria: si se bloquean todos los carriles por 10s o se alcanza 500 puntos
+        //Victoria: 500 puntos
         //if (AllLanesBlockedForSeconds(10) || currentPoints >= 400)
         if (currentPoints >= 400 && currentState != GameState.Victory)
         {
@@ -135,10 +134,10 @@ public class PointManager : MonoBehaviour
             VoiceOverSystem.Instance.PlayWinVoice();
             GameUIManager.Instance.ShowWin();
             OnGameStateChanged?.Invoke(currentState);//ver------
-            return; // Evita que se ejecute más código ese frame
+            return; 
         }
 
-        // Game Over por tiempo
+        //Game Over 
         if (timer >= maxGameTime && currentState != GameState.GameOver)
         {
             currentState = GameState.GameOver;
@@ -148,7 +147,7 @@ public class PointManager : MonoBehaviour
             return;
         }
 
-        // Notificar si hubo cambio de estado
+       
         if (currentState != previousState)
         {
             OnGameStateChanged?.Invoke(currentState);
@@ -210,7 +209,7 @@ public class PointManager : MonoBehaviour
     }
     
     
-    public event Action<int> OnObstacleEvolutionTriggered; // ID del objeto
+    public event Action<int> OnObstacleEvolutionTriggered; 
 
     private void CheckEvolutions()
     {
@@ -221,10 +220,9 @@ public class PointManager : MonoBehaviour
                 obj.Evolved = true;
                 OnObstacleEvolutionTriggered?.Invoke(obj.ID);
 
-                // Buscar todos los obstáculos activos con ese ID y evolucionarlos
                 foreach (var go in FindObjectsOfType<Obstacle>())
                 {
-                    if (go.PoolID == obj.ID) // Asegúrate que PoolID se haya asignado bien
+                    if (go.PoolID == obj.ID) 
                     {
                         //go.Evolve(obj.EvolutionLevel, obj.BaseResistance, obj.EvolvedDamage, obj.Durability);
                         Debug.Log($"[PointManager] Objeto ID {obj.ID} evolucionado en escena con nuevo daño: {obj.EvolvedDamage}");

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PreviewSystem : MonoBehaviour
 {
-    [SerializeField]// Start is called before the first frame update
+    [SerializeField]
     private float previewYOffset = 0.06f;
 
     [SerializeField]

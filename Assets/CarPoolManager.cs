@@ -14,7 +14,7 @@ public class CarPoolManager : MonoBehaviour
     [SerializeField] private List<CarTypePool> carTypes;
 
     [Header("Color Settings")]
-    [SerializeField] private Color[] possibleColors; // Define aquí tus colores
+    [SerializeField] private Color[] possibleColors;
 
     private List<Queue<GameObject>> carPools = new();
 
@@ -57,7 +57,7 @@ public class CarPoolManager : MonoBehaviour
         if (renderer != null && possibleColors.Length > 0)
         {
             Color randomColor = possibleColors[Random.Range(0, possibleColors.Length)];
-            // Instancia material único para este renderer para no afectar a todos
+            //Material por color---------
             renderer.material = new Material(renderer.material);
             renderer.material.color = randomColor;
         }
