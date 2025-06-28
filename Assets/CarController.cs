@@ -167,7 +167,7 @@ public class CarController : MonoBehaviour
 
                     if (!warningShown && warningEffectPrefab != null)
                     {
-                        GameObject effect = Instantiate(warningEffectPrefab, transform.position + Vector3.up * 1.2f, Quaternion.identity);
+                        GameObject effect = Instantiate(warningEffectPrefab, transform.position + Vector3.up * 1.3f, Quaternion.identity);
                         effect.transform.SetParent(transform); // Optional: stick it to the car
                         Destroy(effect, 2f); // Remove after 2 seconds
                         warningShown = true;
